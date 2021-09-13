@@ -1,0 +1,44 @@
+{% extends 'users/home_default.html' %}
+{% load static %}
+{% block content%}
+<div class="main d-grid">
+    <div class="feature d-grid">
+        <div class="booknow">
+            <p>
+                Book your appointment now with best 
+                doctors <span id="bluetext">Now</span> without visiting them.
+            </p>
+            <a href="" class="btn btn-secondry">Book Now</a>
+        </div>
+        <div class="docimagesection">
+            <div class="info d-grid">
+                <div class="content">
+                    <p>
+                        Did not have time to visit <span id="bluetext">Doctor</span> ? 
+                        don't worry we can understand.
+                        <span id="bluetext">HealthCare</span> is a platform for people like 
+                        <span id="bluetext">you</span> !
+                    </p>
+                </div>
+                <div class="img">
+                    <img src="{% static 'images/home_page_doctor_hand_Mobile_HealthCare.png'%}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cards d-grid">
+        <div class="card-item">
+            <h4>Doctor's</h4>
+            <p>500+</p>
+        </div>
+        <div class="card-item">
+            <h4>Doctor's</h4>
+            <p>500+</p>
+        </div>
+        <div class="card-item">
+            <h4>Doctor's</h4>
+            <p>500+</p>
+        </div>
+    </div>
+</div>
+{%endblock%}

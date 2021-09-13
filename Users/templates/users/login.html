@@ -1,0 +1,31 @@
+{% extends 'users/home_default.html'%}
+
+{%block content%}
+<div class="login-form">
+    <h2>Login</h2>
+    <form action="" method="POST" class="form-group">
+
+        <div class="form-item d-flex">
+            <label for="#email" class="form-label">Email</label>
+            <input type="email" placeholder="example@example.com" class="form-field">
+        </div>
+
+        <div class="form-item d-flex">
+            <label for="#email" class="form-label">Password </label>
+            <input type="password" placeholder="" class="form-field">
+        </div>
+        <div class="form-item">
+            <label class="check">Remember Me
+                <input type="checkbox">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div class="form-item ">
+            <button class="btn btn-form shadow">Login</button>
+        </div>
+        <small class="muted-text">
+            <p>Did't have an account? <a href="/register.html" id="bluetext">Register</a></p>
+        </small>
+    </form>
+</div>
+{%endblock%}

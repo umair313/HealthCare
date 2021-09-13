@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static '/css/style.css'%}">
+  <title>HealthCare</title>
+</head>
+
+<body>
+  <div class="container">
+    <header class="d-flex">
+      <div class="brand">
+        <h2><a href="{% url 'Home' %}">HealthCare</a></h2>
+      </div>
+      <nav>
+        <ul class="navigation">
+          <li><a href="{% url 'register' %}" class="btn btn-primary">Register</a></li>
+          <li><a href="{% url 'login' %}" class="btn btn-primary">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+    <footer>
+
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("doctor-specific").style.display = "none";
+    function change() {
+      var x = document.getElementById("id_role").value;
+      // alert(x)
+      if (x == "doctor") {
+        document.getElementById("doctor-specific").style.display = "block";
+      } else {
+        document.getElementById("doctor-specific").style.display = "none";
+      }
+
+    }
+  </script>
+</body>
+
+</html>
