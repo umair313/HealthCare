@@ -27,10 +27,11 @@ class UserInfoForm(forms.ModelForm):
     city = forms.CharField(max_length=20)
     country = forms.CharField(max_length=20)
     mobile_number = forms.IntegerField()
+    profile_picture = forms.ImageField(required=False)
 
     class Meta:
         model = UsersInfo
-        fields = ["role","age","city","country","mobile_number"]
+        fields = ["role","age","city","country","mobile_number","profile_picture"]
 
 
 class DoctorInfoForm(forms.ModelForm):
