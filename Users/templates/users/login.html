@@ -4,15 +4,15 @@
 <div class="login-form">
     <h2>Login</h2>
     <form action="" method="POST" class="form-group">
-
+        {% csrf_tokken%}
         <div class="form-item d-flex">
-            <label for="#email" class="form-label">Email</label>
-            <input type="email" placeholder="example@example.com" class="form-field">
+            <label class="form-label">User name</label>
+            <input type="text" placeholder="" class="form-field" name="username">
         </div>
 
         <div class="form-item d-flex">
-            <label for="#email" class="form-label">Password </label>
-            <input type="password" placeholder="" class="form-field">
+            <label for="#email" class="form-label">Password</label>
+            <input type="password" placeholder="" class="form-field" name="password">
         </div>
         <div class="form-item">
             <label class="check">Remember Me
