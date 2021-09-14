@@ -1,8 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.fields.related import OneToOneField
+from django.db.models.fields.related import ForeignKey, OneToOneField
 from django.forms.utils import flatatt
+import os
 
+def path_and_rename(instance, filename):
+    try:
+        upload_to = "Images/"
+        ext = filename.split('.')[-1]
+        username = instance.user.pk
+        print(username)
+        if username:
+            filename = f"Users_profile_pictures/{username}.{ext}"
+        path = os.path.join(upload_to,filename)
+        return path
+    except:
+        raise ValueError("Instance error")
 
 
 class UsersInfo(models.Model):
@@ -20,20 +33,21 @@ class UsersInfo(models.Model):
     city = models.CharField(max_length=10)
     country = models.CharField(max_length=10)
     mobile_number = models.IntegerField()
+    profile_picture = models.ImageField(upload_to = path_and_rename,blank=True)
 
     
     def __str__(self) -> str:
         return f"(username : {self.user.username}),(role : {self.role})"
 
 class DoctorInfo(models.Model):
-    user = OneToOneField(User,on_delete=models.CASCADE)
+    user_info = ForeignKey(UsersInfo,on_delete=models.CASCADE)
     expertise = models.CharField(max_length=30)
     qualification = models.CharField(max_length=30)
 
 
 
     def __str__(self) -> str:
-        return f"(Username : {self.user.username}), (expertise, {self.expertise}),\
+        return f"(Username : {self.user_info.user.username}), (expertise, {self.expertise}),\
             (qualification): {self.qualification}"
 
 

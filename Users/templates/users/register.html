@@ -5,90 +5,102 @@
     <h2>Register</h2>
     <form action="{% url 'register' %}" method="POST" class="form-group" enctype="multipart/form-data">
         {% csrf_token %}
+
         <div class="form-item d-flex">
             <label class="form-label">User Type</label>
             {{ formUserInfo.role }}
-            
+            <small id="error">{{ formUserInfo.role.error }}</small>
         </div>
+
         <div class="form-item d-flex">
             <label class="form-label">Username</label>
-            {{formRegistration.username}}
+            {{ formRegistration.username }}
+            {{ formRegistration.username.error }}
             <!-- <input type="text" placeholder="Umair" class="form-field"> -->
         </div>
         <div class="form-item d-flex">
             <label class="form-label">First Name</label>
             {{formRegistration.first_name}}
-            
+
             <!-- <input type="text" placeholder="Umair" class="form-field"> -->
         </div>
         <div class="form-item d-flex">
             <label class="form-label">Last Name</label>
             {{formRegistration.last_name}}
-            
+
             <!-- <input type="text" placeholder="Mehmood" class="form-field"> -->
         </div>
-       
+
         <div class="form-item d-flex">
             <label class="form-label">Email</label>
             {{formRegistration.email}}
-            
+            {{formRegistration.email.error}}
+
             <!-- <input type="email" placeholder="example@example.com" class="form-field"> -->
         </div>
         <div class="form-item d-flex">
             <label class="form-label">Password </label>
             <!-- <input type="password" placeholder="8 characters long " class="form-field"> -->
             {{ formRegistration.password1 }}
-            
+            {{ formRegistration.password1.error }}
         </div>
         <div class="form-item d-flex">
             <label class="form-label">Confirm Password </label>
             <!-- <input type="password" placeholder="" class="form-field"> -->
             {{formRegistration.password2}}
-            
+            {{formRegistration.password2.error}}
+
         </div>
         <div class="form-item d-flex">
             <label class="form-label">Age</label>
             {{formUserInfo.age}}
-  
+
             <!-- <input type="number" placeholder="Your Age" class="form-field"> -->
         </div>
         <div class="form-item d-flex">
             <label class="form-label">City</label>
             {{formUserInfo.city}}
-  
+
             <!-- <input type="number" placeholder="Your Age" class="form-field"> -->
         </div>
         <div class="form-item d-flex">
             <label class="form-label">Country</label>
             {{formUserInfo.country}}
-  
+
             <!-- <input type="number" placeholder="Your Age" class="form-field"> -->
         </div>
         <div class="form-item d-flex">
             <label class="form-label">Mobile Number</label>
             {{formUserInfo.mobile_number}}
-  
+
             <!-- <input type="number" placeholder="Your Age" class="form-field"> -->
         </div>
         <div id="doctor-specific">
             <div class="form-item d-flex">
-              <label class="form-label">Qualification</label>
-              <!-- <input type="text" placeholder="eg:. MBBS, Ph.D" class="form-field"> -->
-              {{formDoctorInfo.qualification}}
-              
-          </div>
-          <div class="form-item d-flex">
-            <label class="form-label">Expertise</label>
-            <!-- <input type="text" placeholder="eg:. Heart, Kidny , brain etc." class="form-field"> -->
-            {{formDoctorInfo.expertise}}
-            
+                <label class="form-label">Qualification</label>
+                <!-- <input type="text" placeholder="eg:. MBBS, Ph.D" class="form-field"> -->
+                {{formDoctorInfo.qualification}}
+
+            </div>
+            <div class="form-item d-flex">
+                <label class="form-label">Expertise</label>
+                <!-- <input type="text" placeholder="eg:. Heart, Kidny , brain etc." class="form-field"> -->
+                {{formDoctorInfo.expertise}}
+
+            </div>
         </div>
-          </div>
+        <div class="form-item d-flex">
+            <label class="form-label">Profile Image</label>
+
+            {{ formUserInfo.profile_picture}}
+            {{ formUserInfo.profile_picture.error}}
+
+        </div>
 
         <div class="form-item ">
             <button class="btn btn-form">Register</button>
         </div>
-        
+
         <small class="muted-text">
             <p>Already have an account? <a href="/login.html" id="bluetext">Login</a></p>
         </small>
