@@ -44,7 +44,7 @@ class UsersInfoAdminView(admin.ModelAdmin):
     list_display = ["user_id","role","age","city","country","mobile_number"]
 
 class DoctorInfo(models.Model):
-    user_info = ForeignKey(UsersInfo,on_delete=models.CASCADE)
+    user_info = OneToOneField(UsersInfo,on_delete=models.CASCADE)
     expertise = models.CharField(max_length=30)
     qualification = models.CharField(max_length=30)
 
@@ -52,7 +52,7 @@ class DoctorInfo(models.Model):
 
     def __str__(self) -> str:
         return f"(Username : {self.user_info.user.username}), (expertise, {self.expertise}),\
-            (qualification): {self.qualification}"
+            (qualification : {self.qualification})"
 
 
     
