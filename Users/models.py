@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib import admin
 from django.db.models.fields.related import ForeignKey, OneToOneField
 from django.forms.utils import flatatt
 import os
@@ -38,6 +39,9 @@ class UsersInfo(models.Model):
     
     def __str__(self) -> str:
         return f"(username : {self.user.username}),(role : {self.role})"
+
+class UsersInfoAdminView(admin.ModelAdmin):
+    list_display = ["user_id","role","age","city","country","mobile_number"]
 
 class DoctorInfo(models.Model):
     user_info = ForeignKey(UsersInfo,on_delete=models.CASCADE)

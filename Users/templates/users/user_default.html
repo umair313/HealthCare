@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/all.min.css' %}">
+    <!-- Place your kit's code here -->
+    <script src="https://kit.fontawesome.com/9ce9c6ea4b.js" crossorigin="anonymous"></script>
+    <title>Patients Dashboard</title>
+</head>
+
+<body>
+    <div class="container">
+        <header class="d-flex dashboard">
+            <div class="brand">
+                <h2><a href="{% url 'Home' %}">HealthCare</a></h2>
+            </div>
+            <div class="searchbox">
+                <form action="">
+                    <div class="form-item">
+                        <input type="search" name="" placeholder="Search " id="" class="form-field">
+                        <button class="btn btn-search">search</button>
+                    </div>
+
+                </form>
+            </div>
+            <div>
+                <i class="fas fa-cog"></i>
+                <div class="settingsblock">
+                    <div class="box">
+                        <nav>
+                            <ul>
+                                <li><a href="{% url 'profile'%}">
+                                        <div class="goto-profile">
+                                            <div class="setting-profile-img">
+                                                <!-- <img src="{{user_info.profile_picture.url}}" alt=""> -->
+                                            </div>
+                                            <div class="profile-name">
+                                                <p>{{ user_info.user.first_name }} {{ user_info.user.last_name }}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+        <div class="main-body d-grid">
+            <div class="sidemenu">
+                <nav>
+                    <ul>
+                        <li><a href="./doctors_list.html">Dcoters</a></li>
+                        <li><a href="./patients_appointments.html">Appointments</a></li>
+                    </ul>
+                </nav>
+        
+            </div>
+        {% block dashboard_content%}
+        {% endblock %}
+    </div> <!-- main content ends here--->
+        <footer>
+
+        </footer>
+    </div>
+        <script>
+
+            var settingIcon = document.getElementsByClassName("fa-cog")[0];
+            var settingsBlock = document.getElementsByClassName("settingsblock")[0];
+            settingsBlock.style.display = "none";
+            settingIcon.addEventListener("click", function () {
+                if (settingsBlock.style.display !== "block") {
+                    settingIcon.style.color = "#2964c8";
+                    settingIcon.style.transform = "rotate(60deg)";
+                    settingsBlock.style.transition = "all 5s";
+                    settingsBlock.style.display = "block";
+
+
+                } else {
+                    settingIcon.style.color = "#136ff8";
+                    settingIcon.style.transform = "rotate(0deg)";
+                    settingsBlock.style.display = "none";
+                }
+
+            });
+
+        </script>
+</body>
+
+</html>

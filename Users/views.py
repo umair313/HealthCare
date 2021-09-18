@@ -1,11 +1,46 @@
+from django.contrib import auth
 from django.shortcuts import render, HttpResponse
 from .forms import userRegistrationForm ,UserInfoForm,DoctorInfoForm
+from .models import UsersInfo, DoctorInfo
+from django.contrib.auth.decorators import login_required
+# for uer login
+# from django.contrib.auth import authenticate, logout, login as auth_login
+
+
 # Create your views here.
 def Home(request):
+    user = request.user
+    if user.is_authenticated:
+        user_info = UsersInfo.objects.filter(user=user).first()
+        if user_info:
+            if user_info.role != "doctor":
+                return render(request,"users/patient_dashboard.html",context={"user_info":user_info})
+            else:
+                pass
+        return HttpResponse(f"already login")
     return render(request,"users/index.html")
 
-def login(request):
-    return render(request,"users/login.html")
+# def login(request):
+#     if request.method == "POST":
+#         username = request.POST["username"]
+#         password = request.POST["password"]
+#         user = authenticate(username=username,password=password)
+#         if user:
+#             if user.is_active:
+#                 auth_login(request=request,user=user)
+#                 user_info = UsersInfo.objects.filter(user=user).first()
+#                 if user_info:
+#                     if user_info.role == "doctor":
+#                         doctor_info = DoctorInfo.objects.filter(user_info=user_info).first()
+#                         return HttpResponse(f"role : {doctor_info.user_info.role}")
+                    
+#                     return render(request,"users/patient_dashboard.html", context={"user_info":user_info})
+#                 return HttpResponse("some kind of error")
+#             else:
+#                 return HttpResponse("user is not active!")
+#         else:
+#             return HttpResponse("invalid username of password")
+#     return render(request,"users/login.html")
 
 def register(request):
     if request.method == "POST":
@@ -46,3 +81,16 @@ def register(request):
         "formDoctorInfo": doctor_info_form
     }
     return render(request, "users/register.html" , context=context)
+
+
+
+
+@login_required
+def profile_view(request):
+    user = request.user
+    user_info = UsersInfo.objects.filter(user=user).first()
+    context = {"user_info": user_info}
+    if user_info.role == "doctor":
+        doctor_info = DoctorInfo.objects.filter(user_info=user_info).first()
+        context["doctorr_info"] = doctor_info
+    return render(request,"users/profile.html",context=context)

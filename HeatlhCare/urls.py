@@ -17,9 +17,12 @@ from os import stat
 from django.contrib import admin
 from django.urls import path, include
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("",include('Users.urls'))
+    path("",include('Users.urls')),
+    
+
 ]
 # for store media files
 from django.conf import settings
@@ -27,5 +30,5 @@ from django.conf.urls.static import static
 
 if settings.DEBUG:
     urlpatterns += static(
-        settings.MEDIA_URL,doucment_root=settings.MEDIA_ROOT
+        settings.MEDIA_URL,document_root=settings.MEDIA_ROOT
         )

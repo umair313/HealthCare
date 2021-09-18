@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # My apps
-    'Users.apps.UsersConfig'
+    'Users.apps.UsersConfig',
+    'crispy_forms',
+
 ]
 
 MIDDLEWARE = [
@@ -82,6 +84,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
 
 
 # Password validation
@@ -127,8 +131,13 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # MEDIA URI and MEDIA ROOT
 MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 MEDIA_URL = "/media/"
 
-LOGIN_URL = "Users/login/"
+# LOGIN_URL = "Users/login/"
+LOGIN_REDIRECT_URL = 'Home'
+LOGOUT_REDIRECT_URL = "login"

@@ -1,0 +1,37 @@
+{% extends 'users/user_default.html'%}
+{% load static %}
+{% block dashboard_content %}
+        
+            <div class="main-content">
+                <div class="backlink d-grid">
+                    <div class="navigation-info d-flex">
+                        <p>
+                            <a href="./Patients_dashboard.html"> <span id="bluetext">Dashboard</span></a>
+                            <span><i class="fas fa-angle-right"></i></span>
+                            <a href="{% url 'profile' %}"><span id="bluetext">{{ user_info.user.first_name }}
+                                </span></a>
+                        </p>
+                    </div>
+                </div>
+                <div class="dahsboard-container">
+                    <div class="upcomming-appintment d-flex shadow br-6">
+                        <h4>Upcomming Appointment : 20</h4>
+                        <div class="ds-appintment-btn">
+                            <p>
+                                <a href="" class="shadow">
+                                    <span id="bluetext">View All</span>
+                                </a>
+                            </p>
+                        </div>
+                        <div class="ds-appintment-btn m-left-auto">
+                            <p>
+                                <a href="" class="shadow">
+                                    <span id="bluetext">New Appointment</span>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}

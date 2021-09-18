@@ -223,7 +223,8 @@ header nav{
 } */
 
 .form-item input[type="text"],.form-item input[type="email"],
-.form-item input[type="number"],.form-item input[type="password"]
+.form-item input[type="number"],.form-item input[type="password"],
+.form-item input[type="search"]
 {
     width: 80%;
     font-size: 14px;
@@ -231,6 +232,9 @@ header nav{
     font-weight: 700;
     outline-color: var(--primary-btn-color);
     border: 2px solid #000;
+}
+.form-item input[type="search"]{
+    width: 50%;
 }
 .form-label{
     font-size: 14px;
@@ -317,9 +321,9 @@ header nav{
     background-color: var(--primary-btn-color);
     cursor: pointer;
 }
-#id_role{
+/* #id_role{
     optio
-}
+} */
 #id_role:hover{
     background-color: var(--hover-btn-color);
 }
@@ -330,8 +334,10 @@ header nav{
       display: flex;
       flex-basis: 78%;
       align-items: center;
+      justify-content: center;
       flex-direction: column ;
   }
+
   .searchbox .btn-search{
     display: inline-block;
     width: 10%;
