@@ -1,11 +1,11 @@
 {% extends 'users/user_default.html'%}
 {% load static %}
-{% block dashboard_content %}
-    <div class="main-content">
+{% block profile_view %}
+
         <div class="profile-view d-grid">
             <div class="navigation-info d-flex">
                 <p>
-                    <a href="./Doctor_dashboard.html"> <span id="bluetext">Dashboard</span></a>
+                    <a href="{% url 'Home' %}"> <span id="bluetext">Dashboard</span></a>
                     <span><i class="fas fa-angle-right"></i></span>
                     <a href="{% url 'profile'%}"><span id="bluetext">{{user_info.user.first_name}}</span> </a>
                 </p>
@@ -21,9 +21,9 @@
                         </div>
                         <div class="profile-edit">
                             <p>
-                                <a href="">
+                                <!-- <a href="">
                                     <span id="bluetext">Edit Profile</span>
-                                </a>
+                                </a> -->
                             </p>
                             
                         </div>
@@ -54,7 +54,7 @@
                             {% if doctor_info %}
                             <div class="info-box">
                                 <h4>Qualification</h4>
-                                <p>{{ doctor_info.qualification}}}</p>
+                                <p>{{ doctor_info.qualification }}</p>
                             </div>
                             <div class="info-box">
                                 <h4>Expertise</h4>
@@ -66,6 +66,6 @@
                 </div>
             </div>
         </div>
-    </div>
+
 
 {% endblock%}

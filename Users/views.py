@@ -1,5 +1,6 @@
 from django.contrib import auth
-from django.shortcuts import render, HttpResponse
+from django.db.models import query
+from django.shortcuts import redirect, render, HttpResponse
 from .forms import userRegistrationForm ,UserInfoForm,DoctorInfoForm
 from .models import UsersInfo, DoctorInfo
 from django.contrib.auth.decorators import login_required
@@ -13,11 +14,7 @@ def Home(request):
     if user.is_authenticated:
         user_info = UsersInfo.objects.filter(user=user).first()
         if user_info:
-            if user_info.role != "doctor":
-                return render(request,"users/patient_dashboard.html",context={"user_info":user_info})
-            else:
-                pass
-        return HttpResponse(f"already login")
+            return render(request,"users/dashboard.html",context={"user_info":user_info,"dashboard":True})
     return render(request,"users/index.html")
 
 # def login(request):
@@ -89,8 +86,14 @@ def register(request):
 def profile_view(request):
     user = request.user
     user_info = UsersInfo.objects.filter(user=user).first()
-    context = {"user_info": user_info}
+    context = {"user_info": user_info,"profile":True}
     if user_info.role == "doctor":
         doctor_info = DoctorInfo.objects.filter(user_info=user_info).first()
-        context["doctorr_info"] = doctor_info
+        context["doctor_info"] = doctor_info
     return render(request,"users/profile.html",context=context)
+
+
+@login_required
+def doctors_list_view(request):
+    doctors = DoctorInfo.objects.all()
+    return render(request, "users/doctors.html",context={"doctors":doctors})

@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="{% static '/css/all.min.css' %}">
     <!-- Place your kit's code here -->
     <script src="https://kit.fontawesome.com/9ce9c6ea4b.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" 
+    integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Patients Dashboard</title>
 </head>
 
@@ -61,19 +64,39 @@
             <div class="sidemenu">
                 <nav>
                     <ul>
-                        <li><a href="./doctors_list.html">Dcoters</a></li>
-                        <li><a href="./patients_appointments.html">Appointments</a></li>
+                        {% if user_info.role == 'doctor' %}
+                        <li><a href="">Patients</a></li>
+                        <li><a href="">Appointments</a></li>
+                        {%else%}
+                        <li><a href="{% url 'doctors' %}">Doctors</a></li>
+                        <li><a href="">Appointments</a></li>
+                        {%endif%}
                     </ul>
                 </nav>
         
             </div>
-        {% block dashboard_content%}
-        {% endblock %}
-    </div> <!-- main content ends here--->
+            <div class="main-content">
+            {% if profile %}
+                {% block profile_view %}
+                {% endblock %}
+            {% endif %}
+
+            {% if doctors %}
+                {% block doctor_list_block %}
+                {% endblock%}
+            {% endif %}
+
+            {% if dashboard %}
+                {% block dashboard %}
+                {% endblock %}
+            {% endif %}
+        </div> <!-- main content -->
+    </div><!-- main-body ends here-->
+    </div> <!-- main body ends here--->
         <footer>
 
         </footer>
-    </div>
+    </div> <!-- Container ends here-->
         <script>
 
             var settingIcon = document.getElementsByClassName("fa-cog")[0];
@@ -96,6 +119,58 @@
             });
 
         </script>
+
+       {% if not profile%}
+       <script>
+        var appointment_cvx = document.getElementById("appointmentChart").getContext("2d");
+        var disease_cvx = document.getElementById("diseaseChart").getContext("2d");
+    
+        var appointment_chart = new Chart(appointment_cvx,{
+                type: "bar",
+                data: {
+                    labels:["Jan", "Feb","March","April","May","June","July","Aug","September","Oct","Nov","Dec"],
+                    datasets:[{
+                        label: "Appointments",
+                        data: [56,34,67,110,15,70,45,90,40,120,50,83],
+                        backgroundColor: [
+                        "#3e3d3d",
+                        "Orange",
+                        "Green",
+                        "Blue",
+                        "Purple",
+                        "Red",
+                        "Yellow",
+                        "Gray",
+                        ],
+    
+                    }]
+                },
+                options:{
+                    position: "right"
+                }
+            });
+    
+            var disease_chart = new Chart(disease_cvx,{
+                type: "bar",
+                data:{
+                    labels : ["Covid","Flue","Heart","Kidny","Infection"],
+                    datasets:[{
+                        label: "Disease",
+                        data:[5, 4, 2, 7, 6, 10],
+                        backgroundColor:[
+                            "black",    
+                            "red",
+                            "green",
+                            "yellow",
+                            "purple"
+    
+                        ]
+                    }],
+                },
+                options:{},
+            });
+    </script>
+       {%endif%}
 </body>
 
 </html>

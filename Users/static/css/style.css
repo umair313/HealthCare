@@ -491,8 +491,29 @@ i.fa-cog:hover{
     opacity: 1;
 }
 .name h4{
+    text-transform: uppercase;
     padding: 5px;
 }
+.specialization p{
+    margin-left: 6px;
+}
+#attribute{
+    background-color: var(--primary-btn-color);
+    color: #fff;
+    display: inline-block;
+    padding: 8px;
+    font-weight: 600;
+    margin-left: 4px;
+}
+#value{
+    display: inline-block;
+    background-color: #fff;
+    color: var(--main-font-color);
+    padding: 8px;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
 .profileimage{
     padding: 10px;
 }

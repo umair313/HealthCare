@@ -1,0 +1,33 @@
+{% extends 'users/user_default.html'%}
+{% load static %}
+{% block doctor_list_block %}
+
+<div class="doctors-list d-grid">
+    <nav>
+        <ul>
+            {% for doctor in doctors %}
+            <li>
+                <a href="./doctor_profile.html">
+                    <div class="row">
+                        <div class="profileimage">
+                            <img src="{{ doctor.user_info.profile_picture.url }}" alt="">
+                        </div>
+                        <div class="name">
+                            <h4>{{ doctor.user_info.user.first_name}} {{ doctor.user_info.user.last_name }} </h4>
+                        </div>
+                        <div class="specialization">
+                            <p>| 
+                                <span id="attribute" class="br-6 shadow"> Expertise : </span> <span id="value" class="br-6 shadow">{{ doctor.expertise }}</span>
+                                <span id="attribute" class="br-6 shadow"> Qualification : </span> <span id="value" class="br-6 shadow">{{ doctor.qualification }}</span>
+                            </p>
+                        </div>
+                        
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+</div>
+
+{% endblock %}

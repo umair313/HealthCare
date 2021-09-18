@@ -87,8 +87,8 @@ WSGI_APPLICATION = 'HeatlhCare.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'sql_server.pyodbc',
-        'NAME': 'test',
+        'ENGINE': 'mssql',
+        'NAME': 'Test',
         # 'USER': 'AbdulMir',
         'USER': '',
         # 'PASSWORD': 'Afghanistan8*',
