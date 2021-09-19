@@ -1,9 +1,12 @@
 from django.contrib import auth
+from django.contrib.auth.models import User
 from django.db.models import query
 from django.shortcuts import redirect, render, HttpResponse
-from .forms import userRegistrationForm ,UserInfoForm,DoctorInfoForm
-from .models import UsersInfo, DoctorInfo
+from .forms import userRegistrationForm ,UserInfoForm,DoctorInfoForm, SymtomsForm, AppointmentForm
+from .models import UsersInfo, DoctorInfo, Appointment, symptoms
 from django.contrib.auth.decorators import login_required
+
+
 # for uer login
 # from django.contrib.auth import authenticate, logout, login as auth_login
 
@@ -95,5 +98,16 @@ def profile_view(request):
 
 @login_required
 def doctors_list_view(request):
+    user = request.user
     doctors = DoctorInfo.objects.all()
-    return render(request, "users/doctors.html",context={"doctors":doctors})
+    user_info = UsersInfo.objects.filter(user = user).first()
+    return render(request, "users/doctors.html",context={"doctors":doctors,"user_info":user_info})
+
+
+@login_required
+def doctor_profile(request,doctor_id):
+    user = User.objects.filter(id=doctor_id).first()
+    if user:
+        user_info = UsersInfo.objects.filter(user=user).first()
+        doctor_info = DoctorInfo.objects.filter(user_info=user_info).first()
+    return render(request, "users/doctor_profile.html",context={"doctor_profile":True,"doctor_info":doctor_info,"user_info":user_info})

@@ -7,7 +7,7 @@
         <ul>
             {% for doctor in doctors %}
             <li>
-                <a href="./doctor_profile.html">
+                <a href="{% url 'view-doctor-profile' doctor.user_info.user.id %}">
                     <div class="row">
                         <div class="profileimage">
                             <img src="{{ doctor.user_info.profile_picture.url }}" alt="">

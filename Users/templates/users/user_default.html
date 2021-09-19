@@ -90,6 +90,17 @@
                 {% block dashboard %}
                 {% endblock %}
             {% endif %}
+
+            {% if do_appointment %}
+                {%block make_appointment%}
+                {% endblock %}
+            {% endif%}
+
+            {% if doctor_profile %}
+                {% block doctor_profile_view %}
+                {% endblock %}
+            {% endif %}
+
         </div> <!-- main content -->
     </div><!-- main-body ends here-->
     </div> <!-- main body ends here--->

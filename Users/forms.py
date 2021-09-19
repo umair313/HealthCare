@@ -1,9 +1,12 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.db import models
+from django.db.models import fields
 from django.forms.fields import ChoiceField
+from django.forms.widgets import HiddenInput
 from django.utils.regex_helper import Choice
-from .models import DoctorInfo,UsersInfo
+from .models import DoctorInfo,UsersInfo, Appointment, symptoms
 
 
 
@@ -45,3 +48,13 @@ class DoctorInfoForm(forms.ModelForm):
         model = DoctorInfo
         fields = ["qualification","expertise"]
 
+class AppointmentForm(forms.ModelForm):
+    doctor_name = forms.CharField(widget=forms.HiddenInput())
+    class Meta:
+        model = Appointment
+        fields = ["date","time"]
+
+class SymtomsForm(forms.ModelForm):
+    class Meta:
+        model = symptoms
+        fields = ["blood_pressure","blood_sugar","bmi","hemoglobin","platelets"]

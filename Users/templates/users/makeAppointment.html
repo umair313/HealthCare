@@ -1,0 +1,81 @@
+{% extends 'users/user_default.html'%}
+{% load static %}
+{% block make_appointment %}
+<div class="backlink d-grid">
+    <div class="navigation-info d-flex">
+        <p>
+            <a href="./Patients_dashboard.html"> <span id="bluetext">Dashboard</span></a>
+            <span><i class="fas fa-angle-right"></i></span>
+            <span id="bluetext">Booking Appointment</span>
+            <span><i class="fas fa-angle-right"></i></span>
+            <a href="/profile.html"><span id="bluetext">Dr. Umair</span></a>
+        </p>
+    </div>
+    <div class="appointment-section d-flex">
+        <div class="appointment-box br-6 shadow">
+            <div class="instructions br-6">
+                <p>Please Select Data and 
+                    time and check for availale slot.
+                <br> If the slot is availbe then you can provide 
+                other information and book your Appointment.
+                </p>
+            </div>
+            <div class="slot-not-available br-6">
+                <p>Sorry you can't make appointments slots are full.
+                </p>
+            </div>
+            <div class="error br-6">
+                <p>Date or time is not available. Please select other 
+                </p>
+            </div>
+            <div class="slot-available br-6">
+                <p>Slot is available. you can make appointment.
+                </p>
+            </div>
+            <form action="" method="POST" class="form-group">
+                
+                <div class="form-item d-flex">
+                    <label class="form-label">Date</label>
+                    <input type="date" id="date" class="form-field" min="2021-09-01" max="2022-01-01">
+                    
+                    <!-- <small id="error">Date is not available</small> -->
+                </div>
+                
+                <div class="form-item d-flex">
+                    <label class="form-label">Time</label>
+                    <input type="time" id="time" class="form-field">
+                    <!-- <small id="error">Time is not available</small> -->
+                </div>
+
+                <div class="form-item d-flex">
+                    <label class="form-label">Blood Presure</label>
+                    <input type="number" placeholder="" class="form-field">
+                </div>
+                <div class="form-item d-flex">
+                  <label class="form-label">Body to Mass Index</label>
+                  <input type="number" placeholder="" class="form-field">
+              </div>
+                <div class="form-item d-flex">
+                    <label class="form-label">Blood Sugar</label>
+                    <input type="number" placeholder="" class="form-field">
+                </div>
+                <div class="form-item d-flex">
+                    <label class="form-label">Hemoglobin</label>
+                    <input type="number" placeholder="" class="form-field">
+                </div>
+                <div class="form-item d-flex">
+                    <label class="form-label">Platelets</label>
+                    <input type="number" placeholder="" class="form-field">
+                </div>
+                
+                
+
+                <div class="form-item ">
+                    <button class="btn btn-form">Book</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

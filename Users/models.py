@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
 from django.db.models.fields.related import ForeignKey, OneToOneField
-from django.forms.utils import flatatt
 import os
 
 def path_and_rename(instance, filename):
@@ -61,5 +60,35 @@ class DoctorInfo(models.Model):
 
 
 
+# Appontments
+
+class Appointment(models.Model):
+    patient = models.ManyToManyRel("username",User)
+    doctor = models.ManyToManyRel("username",User)
+    date = models.DateField(blank=False)
+    time = models.TimeField(blank=False)
+    status = models.CharField(default="pending",blank=True, max_length=20)
+
+    def __str__(self) -> str:
+        return f"[(Patient: {self.patient.username}),(Doctor: {self.doctor.username}),(Status :{self.status})]"
+    
+class symptoms(models.Model):
+    appointment = ForeignKey(Appointment,on_delete=models.CASCADE)
+    blood_pressure = models.IntegerField(blank=False)
+    blood_sugar = models.IntegerField(blank=False)
+    bmi = models.IntegerField(blank=False)
+    hemoglobin = models.IntegerField(blank=False)
+    platelets = models.IntegerField(blank=False)
+
+    def __str__(self) -> str:
+        return f"[(Blood Pressure: {self.blood_pressure}),(BMI: {self.bmi}),(Blood Sugar :{self.blood_sugar})]"
 
 
+
+
+class currentAppintments(models.Model):
+    doctor = OneToOneField(DoctorInfo,on_delete=models.CASCADE)
+    appointments = models.IntegerField(default=0, blank=True)
+
+    def __str__(self) -> str:
+        return f"[('doctor','{self.doctor}'),('appointments','{self.appointments}')]"

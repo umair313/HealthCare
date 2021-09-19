@@ -1,58 +1,58 @@
 {% extends 'users/user_default.html'%}
 {% load static %}
-{% block profile_view %}
+{% block doctor_profile_view %}
 
         <div class="profile-view d-grid">
             <div class="navigation-info d-flex">
                 <p>
                     <a href="{% url 'Home' %}"> <span id="bluetext">Dashboard</span></a>
                     <span><i class="fas fa-angle-right"></i></span>
-                    <a href="{% url 'profile'%}"><span id="bluetext">{{user_info.user.first_name}}</span> </a>
+                    <a href="{% url 'profile'%}"><span id="bluetext">{{ doctor_info }}</span> </a>
                 </p>
             </div>
             <div class="profile-container">
                 <div class="profile d-grid">
                     <div class="profile-image-section border shadow br-6" d-flex>
                         <div class="profile-image">
-                            <img src="{{ user_info.profile_picture.url }}" alt="doctor image Profile" class="user-image br-6">
+                            <img src="{{ doctor_info.user_info.profile_picture.url }}" alt="doctor image Profile" class="user-image br-6">
                         </div>
                         <div class="profile-name-section">
-                            <h4>{{ user_info.user.first_name }} {{ user_info.user.last_name }}</h4>
+                            <h4>{{ doctor_info.user_info.user.first_name }} {{ doctor_info.user_info.user.last_name }}</h4>
                         </div>
-                       
-                        <!-- <div class="profile-edit">
+                        {% if doctor_profile %}
+                        <div class="profile-edit">
                             <p>
-                                <a href="">
-                                    <span id="bluetext">Edit Profile</span>
+                                <a href=" ">
+                                    <span id="bluetext">Book Appointment</span>
                                 </a>
                             </p>
-                        </div> -->
-                        
+                        </div>
+                        {% endif %}
                     </div>
                     <div class="profile-info border shadow br-6">
                         <div class="row-info d-grid">
                             <div class="info-box">
                                 <h4>Age</h4>
-                                <p>{{user_info.age}}</p>
+                                <p>{{doctor_info.user_info.age}}</p>
                             </div>
                             
                             <div class="info-box">
                                 <h4>City</h4>
-                                <p>{{user_info.city}}</p>
+                                <p>{{doctor_info.user_info.city}}</p>
                             </div>
                             <div class="info-box">
                                 <h4>Country</h4>
-                                <p>{{user_info.country}}</p>
+                                <p>{{doctor_info.user_info.country}}</p>
                             </div>
                             <div class="info-box">
                                 <h4>Email</h4>
-                                <p>{{user_info.user.email}}</p>
+                                <p>{{doctor_info.user_info.user.email}}</p>
                             </div>
                             <div class="info-box">
                                 <h4>Mobile</h4>
-                                <p>{{user_info.mobile_number}}</p>
+                                <p>{{doctor_info.user_info.mobile_number}}</p>
                             </div>
-                            {% if doctor_info %}
+                            
                             <div class="info-box">
                                 <h4>Qualification</h4>
                                 <p>{{ doctor_info.qualification }}</p>
@@ -61,7 +61,7 @@
                                 <h4>Expertise</h4>
                                 <p>{{ doctor_info.expertise }}</p>
                             </div>
-                            {% endif %}
+                            
                         </div>
                     </div>
                 </div>
