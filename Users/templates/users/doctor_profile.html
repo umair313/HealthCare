@@ -7,7 +7,12 @@
                 <p>
                     <a href="{% url 'Home' %}"> <span id="bluetext">Dashboard</span></a>
                     <span><i class="fas fa-angle-right"></i></span>
-                    <a href="{% url 'profile'%}"><span id="bluetext">{{ doctor_info }}</span> </a>
+
+                    {%if doctor_profile%}
+                    <a href="{% url 'doctors' %}"> <span id="bluetext">Doctors</span></a>
+                        <span><i class="fas fa-angle-right"></i></span>
+                    {% endif %}
+                    <a href="{% url 'profile'%}"><span id="bluetext">{{ doctor_info.user_info.user.first_name }}</span> </a>
                 </p>
             </div>
             <div class="profile-container">

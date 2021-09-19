@@ -64,7 +64,7 @@
             <div class="sidemenu">
                 <nav>
                     <ul>
-                        {% if user_info.role == 'doctor' %}
+                        {% if user_info.role == 'doctor' and not doctor_profile %}
                         <li><a href="">Patients</a></li>
                         <li><a href="">Appointments</a></li>
                         {%else%}
