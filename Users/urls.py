@@ -1,7 +1,9 @@
 from os import name
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import Home, register, profile_view, doctors_list_view, doctor_profile,makeAppointmentForm
+from .views import (Home, register, profile_view, 
+                    doctors_list_view, doctor_profile,makeAppointmentForm,
+                    bookAppointment)
 
 urlpatterns = [
     path("",Home,name="Home"),
@@ -11,5 +13,7 @@ urlpatterns = [
     path("profile/",profile_view,name="profile"),
     path("doctors/", doctors_list_view,name="doctors"),
     path("view/doctor_profile/<int:doctor_id>/",doctor_profile,name="view-doctor-profile"),
-    path("make/appointment/<int:doctor_id>/",makeAppointmentForm,name = "make-Appointment-form")
+    path("make/appointment/<int:doctor_id>/",makeAppointmentForm,name = "make-Appointment-form"),
+    path("book/appointment/<int:doctor_id>",bookAppointment,name="book")
+
 ]
