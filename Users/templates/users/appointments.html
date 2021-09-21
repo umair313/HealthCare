@@ -1,0 +1,56 @@
+{% extends 'users/user_default.html'%}
+{% load static %}
+<!-- Dashboard -->
+{% block appointments %}
+<div class="backlink d-grid">
+    <div class="navigation-info d-flex">
+        <p>
+            <span id="bluetext">/</span>
+            <span><i class="fas fa-angle-right"></i></span>
+            <a href="{% url 'Home' %}"> <span id="bluetext">Dashboard</span></a>
+            <span><i class="fas fa-angle-right"></i></span>
+
+            <a href="{% url 'appointments' %}"><span id="bluetext">Appointments</span></a>
+        </p>
+    </div>
+</div>
+<div class="appointment-list">
+    <table>
+        <tr>
+            <th>Date & Time</th>
+            <th>Dcotor</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        {% if appointments %}
+            {% if user.usersinfo.role == "patient" %}
+                {% for app in appointments%}
+                <tr>
+                    <td>{{ app.date|date:"M n, Y" }} - {{ app.time|time:"h:i A" }}</td>
+                    <td>{{ app.doctor.first_name }} {{ app.doctor.last_name }}</td>
+                    <td>{{ app.status }}</td>
+                    <td><a href="{{ app.id }}" class="btn btn-view">view</a></td>
+                </tr>        
+                {% endfor %}
+            {% else %}
+            {% for app in appointments%}
+            <tr>
+                <td>{{ app.date|date:"M n, Y" }} - {{ app.time|time:"h:i A" }}</td>
+                <td>{{ app.patient.first_name }} {{ app.patient.last_name }}</td>
+                <td>{{ app.status }}</td>
+                {% if app.status == "pending" %}
+                    <td><a href="{{ app.id }}" class="btn btn-view">Attend</a></td>
+                {% else %}
+                    <td><a href="{{ app.id }}" class="btn btn-view">view</a></td>
+                {%endif%}
+            </tr>        
+            {% endfor %}
+            {% endif %}
+        {% endif %}
+    </table>
+ </div>
+    
+
+
+
+{% endblock %}
