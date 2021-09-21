@@ -1,10 +1,17 @@
-from django.contrib import auth, messages
+from os import curdir
+from django.contrib import messages
 from django.contrib.auth.models import User
-from django.db.models import query
 from django.shortcuts import redirect, render, HttpResponse
-from .forms import userRegistrationForm ,UserInfoForm,DoctorInfoForm, SymtomsForm, AppointmentForm
+from .forms import userRegistrationForm ,UserInfoForm,DoctorInfoForm, SymtomsForm
 from .models import UsersInfo, DoctorInfo, Appointment, CurrentAppointments, Symptoms
 from django.contrib.auth.decorators import login_required
+
+
+
+
+
+info_message = "Please Select Data and time and check for availale slot.\
+If the slot is availbe then you can provide other information and book your Appointment."
 
 
 # for uer login
@@ -116,22 +123,17 @@ def doctor_profile(request,doctor_id):
 @login_required
 def makeAppointmentForm(request,doctor_id):
     user_info = UsersInfo.objects.filter(user=request.user).first()
-    appointment_form = AppointmentForm()
     symptoms_From = SymtomsForm()
     user_doctor = User.objects.filter(id=doctor_id).first()
     if user_doctor:
         current = CurrentAppointments.objects.filter(doctor=user_doctor).first()
         if current:
             if current.appointments >= 0 and current.appointments < 10 :
-                messages.info(request,"Please Select Data and \
-                                         time and check for availale slot.\
-                                         If the slot is availbe then you can provide \
-                                         other information and book your Appointment.")
+                messages.info(request,info_message)
                 messages.success(request,"Slot is available. you can make appointment.")
                 return render(request, "users/makeAppointment.html", context={
                                             "do_appointment": True,
                                             "user_info":user_info,
-                                            "appointmentForm": appointment_form,
                                             "symptomForm": symptoms_From,
                                             "doctor_id": user_doctor.id
                 })
@@ -145,8 +147,49 @@ def makeAppointmentForm(request,doctor_id):
 
 @login_required
 def bookAppointment(request,doctor_id):
-    
-    # if request.method == "POST":
+    # Bokk an appointment
+    user_info = UsersInfo.objects.filter(user=request.user).first()
+    symptoms_From = SymtomsForm()
+    user_doctor = User.objects.filter(id=doctor_id).first()
+    if request.method == "POST":
+        # get date and time fro mrequest
+        date = request.POST["date"]
+        time = request.POST["time"]
+        symptoms_form = SymtomsForm(request.POST)
+        # first check if there is already an appointment for given date and time
+        if Appointment.objects.filter(date = date, time = time).first():
+            messages.info(request,info_message)
+            messages.success(request,"Slot is available. you can make appointment.")
+            messages.error(request,"Selected date and time is not available. please select other date and time.")
+            return render(request, "users/makeAppointment.html", context={
+                                            "do_appointment": True,
+                                            "user_info":user_info,
+                                            "symptomForm": symptoms_From,
+                                            "doctor_id": user_doctor.id
+                })
+        # geting doctor and patient  user form User
+        # patient_user = User.objects.filter(id=request.user.id)
+        patient_user = request.user
+        doctor_user = User.objects.filter(id=doctor_id).first()
+        
+        # book the appointment
+        new_appointment = Appointment.objects.create(patient=patient_user,doctor=doctor_user,
+                                                        date=date, time=time, status = "pending")
+
+        # symptoms         
+        symptoms = symptoms_form.save(commit=False)
+        symptoms.appointment = new_appointment
+        symptoms.save()
+
+        # update doctors current active appointments
+        current = CurrentAppointments.objects.filter(doctor=doctor_user).first()
+        current.appointments += 1
+        current.save()
+        messages.success(request,"Your Appointment booked successfully.")
+        return render(request, "users/appointmentErrorPage.html", context={"do_appointment": True,
+                "user_info":user_info,"doctor_id": user_doctor.id})
 
     return redirect('doctors')
+
+
 
