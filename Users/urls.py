@@ -3,7 +3,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from .views import (Home, register, profile_view, 
                     doctors_list_view, doctor_profile,makeAppointmentForm,
-                    bookAppointment)
+                    bookAppointment, all_appointments)
 
 urlpatterns = [
     path("",Home,name="Home"),
@@ -14,6 +14,7 @@ urlpatterns = [
     path("doctors/", doctors_list_view,name="doctors"),
     path("view/doctor_profile/<int:doctor_id>/",doctor_profile,name="view-doctor-profile"),
     path("make/appointment/<int:doctor_id>/",makeAppointmentForm,name = "make-Appointment-form"),
-    path("book/appointment/<int:doctor_id>",bookAppointment,name="book")
+    path("book/appointment/<int:doctor_id>",bookAppointment,name="book"),
+    path("appointments/",all_appointments,name="appointments")
 
 ]

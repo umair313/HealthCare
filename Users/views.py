@@ -1,4 +1,3 @@
-from os import curdir
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render, HttpResponse
@@ -191,5 +190,15 @@ def bookAppointment(request,doctor_id):
 
     return redirect('doctors')
 
-
+@login_required
+def all_appointments(request):
+    user = request.user
+    if user:
+        if user.usersinfo.role == "patient" :
+            _all_appointmments = Appointment.objects.filter(patient = user)
+            return render(request, "users/appointments.html",context={"appointments":_all_appointmments})
+        else:
+            _all_appointmments = Appointment.objects.filter(doctor = user)
+            return render(request, "users/appointments.html",context={"appointments":_all_appointmments})
+    return HttpResponse("Lose return from All_appointment view")
 
