@@ -168,7 +168,7 @@ def bookAppointment(request,doctor_id):
                                             "doctor_id": user_doctor.id
                 })
         # geting doctor and patient  user form User
-        # patient_user = User.objects.filter(id=request.user.id)
+       
         patient_user = request.user
         doctor_user = User.objects.filter(id=doctor_id).first()
         
