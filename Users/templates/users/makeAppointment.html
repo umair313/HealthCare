@@ -20,47 +20,46 @@
                 </div>
                 {% endfor %}
             {% endif %}
-            <form action="" method="POST" class="form-group">
+            <form action="{% url 'book' doctor_id %}" method="POST" class="form-group">
+                {% csrf_token %}
                 <input type="hidden" name="doctor_id" value="{{ doctor_id }}">
                 <div class="form-item d-flex">
                     <label class="form-label">Date</label>
-                    <!-- <input id="datepicker" class="form-field" min="2021-09-01" max="2022-01-01"> -->
                     <input id="datepicker" class="form-field" name="date">
-                     <!-- {{ appointmentForm.date }} -->
+
                 </div>
                 
                 <div class="form-item d-flex">
                     <label class="form-label">Time</label>
-                    <!-- {{ appointmentForm.time }} -->
                     <input type="time" name ="time" class="form-field">
                     
                 </div>
 
                 <div class="form-item d-flex">
                     <label class="form-label">Blood Presure</label>
-                    <!-- <input type="number" placeholder="" class="form-field"> -->
+                 
                     {{ symptomForm.blood_pressure }}
                 </div>
                 <div class="form-item d-flex">
                   <label class="form-label">Body to Mass Index</label>
                   {{ symptomForm.bmi }}
-                  <!-- <input type="number" placeholder="" class="form-field"> -->
+                 
               </div>
                 <div class="form-item d-flex">
                     <label class="form-label">Blood Sugar</label>
                     {{ symptomForm.blood_sugar }}
-                    <!-- <input type="number" placeholder="" class="form-field"> -->
+                   
 
                 </div>
                 <div class="form-item d-flex">
                     <label class="form-label">Hemoglobin</label>
                     {{ symptomForm.hemoglobin }}
-                    <!-- <input type="number" placeholder="" class="form-field"> -->
+                   
                 </div>
                 <div class="form-item d-flex">
                     <label class="form-label">Platelets</label>
                     {{ symptomForm.platelets }}
-                    <!-- <input type="number" placeholder="" class="form-field"> -->
+                    
                 </div>
                 <div class="form-item ">
                     <button class="btn btn-form">Book</button>
