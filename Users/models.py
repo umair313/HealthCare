@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
+from django.db.models import fields
+
 from django.db.models.fields.related import ForeignKey, OneToOneField
 import os
 
@@ -62,14 +64,25 @@ class DoctorInfo(models.Model):
 # Appontments
 
 class Appointment(models.Model):
-    patient = models.ManyToManyField(User,"patient_user")
-    doctor = models.ManyToManyField(User,"doctor_user")
+
+    patient = models.ForeignKey(User,on_delete=models.CASCADE,related_name="appointment_patient")
+    doctor = models.ForeignKey(User,on_delete=models.CASCADE,related_name="appointment_doctor")
+    
+    # patient = models.ForeignKey(UsersInfo,on_delete=models.CASCADE,null=True, blank=True)
+    # doctor = models.ForeignKey(DoctorInfo,on_delete=models.CASCADE,null=True, blank=True)
+
+    
+    # patient = models.ManyToManyField(User, related_name="patient_user")
+    # doctor = models.ManyToManyField(User,related_name="doctor_user")
+
+
+
     date = models.DateField(blank=False)
     time = models.TimeField(blank=False)
     status = models.CharField(default="pending",blank=True, max_length=20)
 
     def __str__(self) -> str:
-        return f"[(Patient: {self.patient.first()}),(Doctor: {self.doctor}),(Status :{self.status})]"
+        return f"(Status :{self.status})"
     
 class Symptoms(models.Model):
     appointment = ForeignKey(Appointment,on_delete=models.CASCADE)
