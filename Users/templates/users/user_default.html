@@ -6,15 +6,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700&display=swap" rel="stylesheet">
+    <!-- heathcare style css -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <!-- Place your kit's code here for fontawesome -->
     <link rel="stylesheet" href="{% static '/css/all.min.css' %}">
-    <!-- Place your kit's code here -->
     <script src="https://kit.fontawesome.com/9ce9c6ea4b.js" crossorigin="anonymous"></script>
+
+    <!-- Charts.js  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" 
     integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Jquery -->
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+
+    <!-- Fengyuan Chen’s Datepicker -->
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css" 
+    integrity="sha512-YdYyWQf8AS4WSB0WWdc3FbQ3Ypdm0QCWD2k4hgfqbQbRCJBEgX0iAegkl2S1Evma5ImaVXLBeUkIlP6hQ1eYKQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" 
+    integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" 
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Patients Dashboard</title>
 </head>
@@ -182,6 +204,13 @@
             });
     </script>
        {%endif%}
+       <script>
+        $(function () {
+          $("#datepicker").datepicker({
+            format: 'yyyy-mm-dd'
+          });
+        });
+      </script>
 </body>
 
 </html>

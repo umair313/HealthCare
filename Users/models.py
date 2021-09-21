@@ -4,11 +4,16 @@ from django.contrib import admin
 from django.db.models.fields.related import ForeignKey, OneToOneField
 import os
 
+
+YEAR = [ year for year in range(1990,2050) ]
+MONTHS = ["January","Feburary","March","Aprill","May","June","July","Auguest","September","October","November","December"]
+
+
 def path_and_rename(instance, filename):
     try:
         upload_to = "Images/"
         ext = filename.split('.')[-1]
-        username = instance.user.pk
+        username = instance.user.username
         print(username)
         if username:
             filename = f"Users_profile_pictures/{username}.{ext}"
@@ -54,25 +59,19 @@ class DoctorInfo(models.Model):
             (qualification : {self.qualification})"
 
 
-    
-    
-
-
-
-
 # Appontments
 
 class Appointment(models.Model):
-    patient = models.ManyToManyRel("username",User)
-    doctor = models.ManyToManyRel("username",User)
+    patient = models.ManyToManyField(User,"patient_user")
+    doctor = models.ManyToManyField(User,"doctor_user")
     date = models.DateField(blank=False)
     time = models.TimeField(blank=False)
     status = models.CharField(default="pending",blank=True, max_length=20)
 
     def __str__(self) -> str:
-        return f"[(Patient: {self.patient.username}),(Doctor: {self.doctor.username}),(Status :{self.status})]"
+        return f"[(Patient: {self.patient.first()}),(Doctor: {self.doctor}),(Status :{self.status})]"
     
-class symptoms(models.Model):
+class Symptoms(models.Model):
     appointment = ForeignKey(Appointment,on_delete=models.CASCADE)
     blood_pressure = models.IntegerField(blank=False)
     blood_sugar = models.IntegerField(blank=False)
@@ -86,8 +85,8 @@ class symptoms(models.Model):
 
 
 
-class currentAppintments(models.Model):
-    doctor = OneToOneField(DoctorInfo,on_delete=models.CASCADE)
+class CurrentAppointments(models.Model):
+    doctor = models.OneToOneField(User,on_delete=models.CASCADE)
     appointments = models.IntegerField(default=0, blank=True)
 
     def __str__(self) -> str:

@@ -27,7 +27,7 @@
                         {% if doctor_profile %}
                         <div class="profile-edit">
                             <p>
-                                <a href=" ">
+                                <a href="{% url 'make-Appointment-form' doctor_info.user_info.user.id%}">
                                     <span id="bluetext">Book Appointment</span>
                                 </a>
                             </p>

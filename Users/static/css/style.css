@@ -133,13 +133,13 @@ header nav{
 }
 /* .docimagesection{} */
 
-.info{
+.docinfo{
     grid-template-columns: 1fr 1fr;
     background-color: #fff;
     border-radius: 38px;
     box-shadow: 0 3px 13px var(--box-shadow-color);
 }
-.info p{ 
+.docinfo p{ 
     text-align: center;
     padding: 10px;
 }
@@ -673,21 +673,21 @@ tr:first-child{
 background-color: #fff;
     
 }
-.instructions,.slot-available,.slot-not-available,.error{
+.appointment-box .info, .success,.error{
     margin: 10px;
 }
-.instructions{
+.appointment-box .info{
     background-color: var(--primary-btn-color);
 }
-.instructions p,.slot-not-available p,.slot-available p,.error p{
+.appointment-box .info p, .error p, .success p{
     padding: 10px;
     color: #fff;
     font-weight: 700;
 }
-.slot-not-available,.error{
+.error{
     background-color: #DC3545;
 }
-.slot-available{
+.success{
     background-color: #28A745;
 }
 #error{
