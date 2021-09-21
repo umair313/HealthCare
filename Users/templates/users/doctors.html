@@ -1,7 +1,17 @@
 {% extends 'users/user_default.html'%}
 {% load static %}
 {% block doctor_list_block %}
-
+<div class="backlink d-grid">
+    <div class="navigation-info d-flex">
+        <p>
+            <span id="bluetext">/</span>
+            <span><i class="fas fa-angle-right"></i></span>
+            <a href="{% url 'Home' %}"> <span id="bluetext">Dashboard</span></a>
+            <span><i class="fas fa-angle-right"></i></span>
+            <a href="{% url 'doctors' %}"> <span id="bluetext">Doctors</span></a>
+        </p>
+    </div>
+</div>
 <div class="doctors-list d-grid">
     <nav>
         <ul>

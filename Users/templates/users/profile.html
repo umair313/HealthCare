@@ -1,13 +1,17 @@
 {% extends 'users/user_default.html'%}
 {% load static %}
 {% block profile_view %}
-
         <div class="profile-view d-grid">
             <div class="navigation-info d-flex">
                 <p>
+
+                    <span id="bluetext">/</span>
+                    <span><i class="fas fa-angle-right"></i></span>
                     <a href="{% url 'Home' %}"> <span id="bluetext">Dashboard</span></a>
                     <span><i class="fas fa-angle-right"></i></span>
-                    <a href="{% url 'profile'%}"><span id="bluetext">{{user_info.user.first_name}}</span> </a>
+                    <span id="bluetext">Profile</span> 
+                    <span><i class="fas fa-angle-right"></i></span>
+                    <a href="{% url 'profile'%}"><span id="bluetext">{{ user.username }}</span> </a>
                 </p>
             </div>
             <div class="profile-container">
