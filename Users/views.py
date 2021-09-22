@@ -254,3 +254,18 @@ def view_appointment(request,id):
         "disease": disease,
     }
     return render(request, "users/view_appointment.html",context=context)
+
+@login_required
+def attend_appointment_form(request,id):
+    appointment = Appointment.objects.filter(id=id).first()
+    symptom = appointment.symptom_set.first()
+    test = appointment.testresult_set.first()
+    medicine = MedicineForm()
+    disease = DiseaseForm()
+    context = {
+        "symptom" : symptom,
+        "test": test,
+        "medicine":medicine,
+        "disease": disease,
+    }
+    return render(request, "users/attend_appointment.html",context=context)
