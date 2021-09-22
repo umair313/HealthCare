@@ -4,7 +4,9 @@
 <div class="backlink d-grid">
     <div class="navigation-info d-flex">
         <p>
-            <a href="./Patients_dashboard.html"> <span id="bluetext">Dashboard</span></a>
+            <span id="bluetext">/</span>
+            <span><i class="fas fa-angle-right"></i></span>
+            <a href="{% url 'Home' %}"> <span id="bluetext">Dashboard</span></a>
             <span><i class="fas fa-angle-right"></i></span>
             <span id="bluetext">Booking Appointment</span>
             <span><i class="fas fa-angle-right"></i></span>
@@ -34,31 +36,36 @@
                     <input type="time" name ="time" class="form-field">
                     
                 </div>
+                <div class="form-item d-flex">
+                    <label class="form-label">Symtoms</label>
+                 
+                    {{ symptomForm.symptom }}
+                </div>
 
                 <div class="form-item d-flex">
                     <label class="form-label">Blood Presure</label>
                  
-                    {{ symptomForm.blood_pressure }}
+                    {{ test_result_form.blood_pressure }}
                 </div>
                 <div class="form-item d-flex">
                   <label class="form-label">Body to Mass Index</label>
-                  {{ symptomForm.bmi }}
+                  {{ test_result_form.bmi }}
                  
               </div>
                 <div class="form-item d-flex">
                     <label class="form-label">Blood Sugar</label>
-                    {{ symptomForm.blood_sugar }}
+                    {{ test_result_form.blood_sugar }}
                    
 
                 </div>
                 <div class="form-item d-flex">
                     <label class="form-label">Hemoglobin</label>
-                    {{ symptomForm.hemoglobin }}
+                    {{ test_result_form.hemoglobin }}
                    
                 </div>
                 <div class="form-item d-flex">
                     <label class="form-label">Platelets</label>
-                    {{ symptomForm.platelets }}
+                    {{ test_result_form.platelets }}
                     
                 </div>
                 <div class="form-item ">
