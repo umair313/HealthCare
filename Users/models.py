@@ -68,15 +68,6 @@ class Appointment(models.Model):
     patient = models.ForeignKey(User,on_delete=models.CASCADE,related_name="appointment_patient")
     doctor = models.ForeignKey(User,on_delete=models.CASCADE,related_name="appointment_doctor")
     
-    # patient = models.ForeignKey(UsersInfo,on_delete=models.CASCADE,null=True, blank=True)
-    # doctor = models.ForeignKey(DoctorInfo,on_delete=models.CASCADE,null=True, blank=True)
-
-    
-    # patient = models.ManyToManyField(User, related_name="patient_user")
-    # doctor = models.ManyToManyField(User,related_name="doctor_user")
-
-
-
     date = models.DateField(blank=False)
     time = models.TimeField(blank=False)
     status = models.CharField(default="pending",blank=True, max_length=20)
@@ -84,7 +75,14 @@ class Appointment(models.Model):
     def __str__(self) -> str:
         return f"(Status :{self.status})"
     
-class Symptoms(models.Model):
+class Symptom(models.Model):
+    appointment = ForeignKey(Appointment,on_delete=models.CASCADE)
+    symptom = models.TextField(max_length=200)
+
+    def __str__(self) -> str:
+        return f"('symptom', '{self.symptom}')"
+
+class TestResult(models.Model):
     appointment = ForeignKey(Appointment,on_delete=models.CASCADE)
     blood_pressure = models.IntegerField(blank=False)
     blood_sugar = models.IntegerField(blank=False)
@@ -95,6 +93,22 @@ class Symptoms(models.Model):
     def __str__(self) -> str:
         return f"[(Blood Pressure: {self.blood_pressure}),(BMI: {self.bmi}),(Blood Sugar :{self.blood_sugar})]"
 
+
+class Medicine(models.Model):
+    appointment = ForeignKey(Appointment,on_delete=models.CASCADE)
+    medicine = models.TextField(max_length=500, default="Not examined yet")
+
+    def __str__(self) -> str:
+        return f"('medicine', '{self.medicine}')"
+
+
+class Disease(models.Model):
+    appointment = ForeignKey(Appointment,on_delete=models.CASCADE)
+    disease = models.TextField(max_length=500, default="Not examined yet")
+
+
+    def __str__(self) -> str:
+        return f"('disease', '{self.disease}')"
 
 
 
