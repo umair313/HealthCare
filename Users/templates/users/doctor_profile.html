@@ -12,7 +12,7 @@
                     <a href="{% url 'doctors' %}"> <span id="bluetext">Doctors</span></a>
                         <span><i class="fas fa-angle-right"></i></span>
                     {% endif %}
-                    <a href="{% url 'profile'%}"><span id="bluetext">{{ doctor_info.user_info.user.first_name }}</span> </a>
+                    <a href="{% url 'view-doctor-profile' doctor_info.user_info.user.id %}"><span id="bluetext">{{ doctor_info.user_info.user.first_name }}</span> </a>
                 </p>
             </div>
             <div class="profile-container">
