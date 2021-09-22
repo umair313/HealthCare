@@ -86,6 +86,26 @@ def register(request):
 
 
 @login_required
+def searchpage(request):
+    return render(request,"users/searchpage.html")
+
+@login_required
+def search(request):
+    if request.method == "POST":
+        query = request.POST["search"]
+        query = query.lower()
+        doctors = []
+        
+        doctor_query = DoctorInfo.objects.all()
+        for doctor in doctor_query:
+            if query in doctor.qualification.lower() or query in doctor.expertise.lower():
+                doctors.append(doctor)
+        if doctors:
+                return render(request, "users/doctors.html",context={"doctors":doctors})
+        messages.error(request,"didnot found related doctor")
+    return render(request,"users/searchpage.html")
+
+@login_required
 def profile_view(request):
     # current user profile view
     # get the current user
@@ -104,10 +124,8 @@ def profile_view(request):
 
 @login_required
 def doctors_list_view(request):
-    user = request.user
     doctors = DoctorInfo.objects.all()
-    user_info = UsersInfo.objects.filter(user = user).first()
-    return render(request, "users/doctors.html",context={"doctors":doctors,"user_info":user_info})
+    return render(request, "users/doctors.html",context={"doctors":doctors})
 
 
 @login_required
