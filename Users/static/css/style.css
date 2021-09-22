@@ -346,14 +346,24 @@ header nav{
     border: none;
     cursor: pointer;
   }
+
   .searchbox .form-field{
       width: 50%;
   }
+
   .searchbox form{
       text-align: center;
       width: 70%;
+      padding: 10px;
+      /* margin:12px; */
   }
 /* setting icon and setting block */
+
+.settingicon{
+    margin-left: auto;
+    margin-right: 54px;
+    padding: 15px;
+}
 
 i.fa-cog{
     font-size: 22px;
@@ -673,13 +683,13 @@ tr:first-child{
 background-color: #fff;
     
 }
-.appointment-box .info, .success,.error{
+.appointment-box .info,.information .success,.error{
     margin: 10px;
 }
-.appointment-box .info{
+.appointment-box .info,.information{
     background-color: var(--primary-btn-color);
 }
-.appointment-box .info p, .error p, .success p{
+.appointment-box .info p, .error p, .success p,.information p{
     padding: 10px;
     color: #fff;
     font-weight: 700;
@@ -815,6 +825,10 @@ background-color: #fff;
     font-size: 18px;
     font-weight: 600px;
 }
+
+/* .search-field{
+    margin: -10px;
+} */
 /* Scroll bar */
 
 ::-webkit-scrollbar{
