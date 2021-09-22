@@ -23,9 +23,7 @@ If the slot is availbe then you can provide other information and book your Appo
 def Home(request):
     user = request.user
     if user.is_authenticated:
-        user_info = UsersInfo.objects.filter(user=user).first()
-        if user_info:
-            return render(request,"users/dashboard.html",context={"user_info":user_info,"dashboard":True})
+            return render(request,"users/dashboard.html")
     return render(request,"users/index.html")
 
 
