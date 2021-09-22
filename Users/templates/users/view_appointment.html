@@ -1,0 +1,57 @@
+{% extends 'users/user_default.html'%}
+{% load static %}
+{% block view_appointment %}
+<div class="backlink d-grid">
+    <div class="navigation-info d-flex">
+        <p>
+            <a href="{% url 'Home' %}"> <span id="bluetext">Dashboard</span></a>
+            <span><i class="fas fa-angle-right"></i></span>
+            <span id="bluetext">Appointment</span>
+        </p>
+    </div>
+</div>
+<div class="dahsboard-container">
+    <div class="appointment-data-section d-grid ">
+        <div class="appointment-data d-grid">
+            <div class="data-box shadow br-6">
+                <h4>Symptoms</h4>
+                <p></p>
+            </div>
+            <div class="data-box shadow br-6">
+                <h4>Blood Pressure</h4>
+                <p></p>
+            </div>
+            <div class="data-box shadow br-6">
+                <h4>platelets</h4>
+                <p></p>
+            </div>
+            <div class="data-box shadow br-6">
+                <h4>Hemoglobin</h4>
+                <p></p>
+            </div>
+            <div class="data-box shadow br-6">
+                <h4>Body Mass Index</h4>
+                <p></p>
+            </div>
+            <div class="data-box shadow br-6">
+                <h4>Blood sugar</h4>
+                <p></p>
+            </div>
+
+        </div>
+        <div class="br-6">
+          <div class="appointment-data d-grid">
+              <div class="data-box shadow br-6">
+                  <h4>Disease</h4>
+                  <p></p>
+              </div>
+              <div class="data-box shadow br-6">
+                  <h4>Medicine</h4>
+                  <p></p>
+              </div>
+
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
