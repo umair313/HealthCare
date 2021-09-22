@@ -46,7 +46,7 @@
                 <td>{{ app.patient.first_name }} {{ app.patient.last_name }}</td>
                 <td>{{ app.status }}</td>
                 {% if app.status == "pending" %}
-                    <td><a href="{{ app.id }}" class="btn btn-view">Attend</a></td>
+                    <td><a href="{% url 'attend-appointment' app.id %}" class="btn btn-view">Attend</a></td>
                 {% else %}
                     <td><a href="{% url 'view-appointment' app.id %}" class="btn btn-view">view</a></td>
                 {%endif%}
