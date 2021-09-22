@@ -699,6 +699,7 @@ background-color: #fff;
 .dahsboard-container{
     width: 98%;
     margin: 0 auto;
+    padding-bottom: 100px;
 }
 .upcomming-appintment{
     align-items: center;
@@ -782,15 +783,33 @@ background-color: #fff;
     
     /* padding: 10px; */
 }
+
+.appinfo{
+    border-left: 1px solid #e0e0e0;
+    padding-left: 10px;
+}
 .remarks-form{
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+
 }
+.remarks-form .form-item{
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+.remark-forms .form-item .form-label{
+  display: block;
+}
+
 .btn-submit{
     border: none;
     padding: 10px;
     cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600px;
 }
 /* Scroll bar */
 
