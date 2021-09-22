@@ -241,4 +241,16 @@ def patient_profile(request,patient_id):
 
 @login_required
 def view_appointment(request,id):
-    return render(request, "users/view_appointment.html")
+    appointment = Appointment.objects.filter(id=id).first()
+    
+    symptom = appointment.symptom_set.first()
+    test = appointment.testresult_set.first()
+    medicine = appointment.medicine_set.first()
+    disease = appointment.disease_set.first()
+    context = {
+        "symptom" : symptom,
+        "test": test,
+        "medicine":medicine,
+        "disease": disease,
+    }
+    return render(request, "users/view_appointment.html",context=context)
