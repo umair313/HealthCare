@@ -1,9 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render, HttpResponse
-from .forms import userRegistrationForm ,UserInfoForm,DoctorInfoForm, SymtomsForm
-from .models import UsersInfo, DoctorInfo, Appointment, CurrentAppointments, Symptoms
 from django.contrib.auth.decorators import login_required
+from .forms import (MedicineForm, userRegistrationForm ,UserInfoForm,
+                        DoctorInfoForm, SymtomsForm, TestResultForm, DiseaseForm)
+from .models import (UsersInfo, DoctorInfo, Appointment, 
+                        CurrentAppointments, Medicine, Disease)
 
 
 
@@ -123,6 +125,7 @@ def doctor_profile(request,doctor_id):
 def makeAppointmentForm(request,doctor_id):
     user_info = UsersInfo.objects.filter(user=request.user).first()
     symptoms_From = SymtomsForm()
+    test_result_form = TestResultForm()
     user_doctor = User.objects.filter(id=doctor_id).first()
     if user_doctor:
         current = CurrentAppointments.objects.filter(doctor=user_doctor).first()
@@ -134,6 +137,7 @@ def makeAppointmentForm(request,doctor_id):
                                             "do_appointment": True,
                                             "user_info":user_info,
                                             "symptomForm": symptoms_From,
+                                            "test_result_form": test_result_form,
                                             "doctor_id": user_doctor.id
                 })
             else:
@@ -149,12 +153,14 @@ def bookAppointment(request,doctor_id):
     # Bokk an appointment
     user_info = UsersInfo.objects.filter(user=request.user).first()
     symptoms_From = SymtomsForm()
+    test_result_form = TestResultForm()
     user_doctor = User.objects.filter(id=doctor_id).first()
     if request.method == "POST":
         # get date and time fro mrequest
         date = request.POST["date"]
         time = request.POST["time"]
         symptoms_form = SymtomsForm(request.POST)
+        test_result_form = TestResultForm(request.POST)
         # first check if there is already an appointment for given date and time
         if Appointment.objects.filter(date = date, time = time).first():
             messages.info(request,info_message)
@@ -164,6 +170,7 @@ def bookAppointment(request,doctor_id):
                                             "do_appointment": True,
                                             "user_info":user_info,
                                             "symptomForm": symptoms_From,
+                                            "test_result_form": test_result_form,
                                             "doctor_id": user_doctor.id
                 })
         # geting doctor and patient  user form User
@@ -180,6 +187,19 @@ def bookAppointment(request,doctor_id):
         symptoms.appointment = new_appointment
         symptoms.save()
 
+        # test results
+        test_result = test_result_form.save(commit=False)
+        test_result.appointment = new_appointment
+        test_result.save()
+
+        # medicine 
+        medicine = Medicine.objects.create(appointment= new_appointment)
+        medicine.save()
+
+        # Disease 
+        disease = Disease.objects.create(appointment = new_appointment)
+        disease.save()
+        
         # update doctors current active appointments
         current = CurrentAppointments.objects.filter(doctor=doctor_user).first()
         current.appointments += 1
@@ -202,3 +222,16 @@ def all_appointments(request):
             return render(request, "users/appointments.html",context={"appointments":_all_appointmments})
     return HttpResponse("Lose return from All_appointment view")
 
+@login_required
+def patients(request):
+    user = request.user
+    if user.usersinfo.role == "doctor":
+        appointments = user.appointment_doctor.all()
+        return render(request,"users/patients.html",context={"doctor_app":appointments})
+
+
+
+@login_required
+def patient_profile(request,patient_id):
+    patient = User.objects.filter(id=patient_id).first()
+    return render(request, "users/patient_profile.html",context={"patient":patient})
