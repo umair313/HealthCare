@@ -16,14 +16,15 @@
 </div>
 <div class="appointment-list">
     <table>
-        <tr>
-            <th>Date & Time</th>
-            <th>Dcotor</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
+      
         {% if appointments %}
             {% if user.usersinfo.role == "patient" %}
+                <tr>
+                    <th>Date & Time</th>
+                    <th>Dcotor</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
                 {% for app in appointments%}
                 <tr>
                     <td>{{ app.date|date:"M n, Y" }} - {{ app.time|time:"h:i A" }}</td>
@@ -33,6 +34,12 @@
                 </tr>        
                 {% endfor %}
             {% else %}
+                <tr>
+                    <th>Date & Time</th>
+                    <th>Patient</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
             {% for app in appointments%}
             <tr>
                 <td>{{ app.date|date:"M n, Y" }} - {{ app.time|time:"h:i A" }}</td>
