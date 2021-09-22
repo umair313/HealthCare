@@ -12,42 +12,42 @@
 </div>
 <div class="dahsboard-container">
     <div class="appointment-data-section d-grid ">
-        <div class="appointment-data d-grid">
-            <div class="data-box shadow br-6">
+        <div class="appinfo appointment-data d-grid">
+            <div class="data-box br-6">
                 <h4>Symptoms</h4>
-                <p></p>
+                <p>{{ symptom.symptom }}</p>
             </div>
-            <div class="data-box shadow br-6">
+            <div class="data-box br-6">
                 <h4>Blood Pressure</h4>
-                <p></p>
+                <p>{{ test.blood_pressure }}</p>
             </div>
-            <div class="data-box shadow br-6">
-                <h4>platelets</h4>
-                <p></p>
+            <div class="data-box br-6">
+                <h4>Blood Sugar</h4>
+                <p>{{ test.blood_sugar }}</p>
             </div>
-            <div class="data-box shadow br-6">
+            <div class="data-box br-6">
                 <h4>Hemoglobin</h4>
-                <p></p>
+                <p>{{ test.hemoglobin }}</p>
             </div>
-            <div class="data-box shadow br-6">
+            <div class="data-box br-6">
                 <h4>Body Mass Index</h4>
-                <p></p>
+                <p>{{ test.bmi }}</p>
             </div>
-            <div class="data-box shadow br-6">
-                <h4>Blood sugar</h4>
-                <p></p>
+            <div class="data-box br-6">
+                <h4>Platelets</h4>
+                <p>{{ test.platelets }}</p>
             </div>
 
         </div>
         <div class="br-6">
-          <div class="appinfo appointment-data d-grid">
-              <div class="data-box shadow br-6">
+          <div class="appointment-data">
+              <div class="data-box br-6">
                   <h4>Disease</h4>
-                  <p></p>
+                  <p> {{ disease.disease}}</p>
               </div>
-              <div class="data-box shadow br-6">
+              <div class="data-box br-6">
                   <h4>Medicine</h4>
-                  <p></p>
+                  <p> {{ medicine.medicine }}</p>
               </div>
 
           </div>

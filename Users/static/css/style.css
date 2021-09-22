@@ -763,14 +763,21 @@ background-color: #fff;
     margin-left: 38px;
 }
 .appointment-data{
+    padding: 5px;
     gap: 10px;
     grid-template-rows: 80px;
-    grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
-    
+    grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+    background-color: #eee;
+    border-radius: 6px;
 }
 .data-box{
     padding: 4px;
     background-color: var(--primary-btn-color);
+    margin: 6px;
+
+}
+.data-box:hover{
+    box-shadow: 0 3px 13px var(--box-shadow-color);
 }
 .data-box h4,.data-box p{
     color: #fff;
@@ -784,10 +791,7 @@ background-color: #fff;
     /* padding: 10px; */
 }
 
-.appinfo{
-    border-left: 1px solid #e0e0e0;
-    padding-left: 10px;
-}
+
 .remarks-form{
     display: flex;
     flex-direction: column;
