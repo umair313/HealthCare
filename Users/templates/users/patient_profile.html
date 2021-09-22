@@ -1,0 +1,59 @@
+{% extends 'users/user_default.html'%}
+{% load static %}
+{% block patient_profile_view %}
+
+        <div class="profile-view d-grid">
+            <div class="navigation-info d-flex">
+                <p>
+                    <span id="bluetext">/</span>
+                    <span><i class="fas fa-angle-right"></i></span>
+                    <a href="{% url 'Home' %}"> <span id="bluetext">Dashboard</span></a>
+                    <span><i class="fas fa-angle-right"></i></span>
+                    <a href="{% url 'patients' %}"> <span id="bluetext">Patients</span></a>
+                    <span><i class="fas fa-angle-right"></i></span>
+                    <a href="{% url 'patient-profile' patient.id %}"><span id="bluetext">{{ patient.first_name }}</span> </a>
+                </p>
+            </div>
+            <div class="profile-container">
+                <div class="profile d-grid">
+                    <div class="profile-image-section border shadow br-6" d-flex>
+                        <div class="profile-image">
+                            <img src="{{ patient.usersinfo.profile_picture.url }}" alt="patient profile image" class="user-image br-6">
+                        </div>
+                        <div class="profile-name-section">
+                            <h4>{{ patient.first_name }} {{ patient.last_name }}</h4>
+                        </div>
+                    </div>
+                    <div class="profile-info border shadow br-6">
+                        <div class="row-info d-grid">
+                            <div class="info-box">
+                                <h4>Age</h4>
+                                <p>{{ patient.usersinfo.age }}</p>
+                            </div>
+                            
+                            <div class="info-box">
+                                <h4>City</h4>
+                                <p>{{ patient.usersinfo.city}}</p>
+                            </div>
+                            <div class="info-box">
+                                <h4>Country</h4>
+                                <p>{{ patient.usersinfo.country}}</p>
+                            </div>
+                            <div class="info-box">
+                                <h4>Email</h4>
+                                <p>{{ patient.usersinfo.user.email}}</p>
+                            </div>
+                            <div class="info-box">
+                                <h4>Mobile</h4>
+                                <p>{{ patient.usersinfo.mobile_number}}</p>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+{% endblock%}
