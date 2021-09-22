@@ -58,7 +58,7 @@ class DoctorInfo(models.Model):
 
     def __str__(self) -> str:
         return f"(Username : {self.user_info.user.username}), (expertise, {self.expertise}),\
-            (qualification : {self.qualification})"
+(qualification : {self.qualification})"
 
 
 # Appontments
