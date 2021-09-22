@@ -1,0 +1,33 @@
+{% extends 'users/user_default.html'%}
+{%block search%}
+<div class="backlink d-grid">
+    <div class="navigation-info d-flex">
+        <p>
+            <span id="bluetext">/</span>
+            <span><i class="fas fa-angle-right"></i></span>
+            <a href="{% url 'Home' %}"> <span id="bluetext">Dashboard</span></a>
+            <span><i class="fas fa-angle-right"></i></span>
+            <span id="bluetext">Search</span>
+            
+        </p>
+    </div>
+</div>
+<form action="{% url 'search'%}" method="POST" class="form-group">
+    {% csrf_token %}
+    {% if messages %}
+    {% for message in messages%}
+    <div class="{{ message.tags}} br-6">
+        <p>{{ message }}</p>
+    </div>
+    {% endfor %}
+{% endif %}
+    <div class="form-item d-flex">
+        <label for="#email" class="form-label">Search by Qualification, Expertise</label>
+        <input type="search" name="search">
+    </div>
+    <div class="form-item ">
+        <button class="btn btn-form shadow">Search</button>
+    </div>
+
+</form>
+{% endblock %}
