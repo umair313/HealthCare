@@ -68,7 +68,7 @@
                                                 <!-- <img src="{{user_info.profile_picture.url}}" alt=""> -->
                                             </div>
                                             <div class="profile-name">
-                                                <p>{{ user_info.user.first_name }} {{ user_info.user.last_name }}</p>
+                                                <p>{{ user.first_name }} {{ user.last_name }}</p>
                                             </div>
                                         </div>
                                     </a>
@@ -86,12 +86,13 @@
             <div class="sidemenu">
                 <nav>
                     <ul>
-                        {% if user_info.role == 'doctor' and not doctor_profile %}
-                        <li><a href="">Patients</a></li>
-                        <li><a href="">Appointments</a></li>
+                        
+                        {% if user.usersinfo.role == 'doctor' %}
+                        <li><a href="{% url 'patients'%}">Patients</a></li>
+                        <li><a href="{% url 'appointments' %}">Appointments</a></li>
                         {%else%}
                         <li><a href="{% url 'doctors' %}">Doctors</a></li>
-                        <li><a href="">Appointments</a></li>
+                        <li><a href="{% url 'appointments' %}">Appointments</a></li>
                         {%endif%}
                     </ul>
                 </nav>
@@ -122,6 +123,14 @@
                 {% block doctor_profile_view %}
                 {% endblock %}
             {% endif %}
+            {% block appointments %}
+            {% endblock %}
+
+            {% block patients_list_block %}
+            {% endblock%}
+            
+            {% block patient_profile_view %}
+            {% endblock %}
 
         </div> <!-- main content -->
     </div><!-- main-body ends here-->

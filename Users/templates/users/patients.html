@@ -1,0 +1,38 @@
+{% extends 'users/user_default.html'%}
+{% load static %}
+{% block patients_list_block %}
+<div class="backlink d-grid">
+    <div class="navigation-info d-flex">
+        <p>
+            <span id="bluetext">/</span>
+            <span><i class="fas fa-angle-right"></i></span>
+            <a href="{% url 'Home' %}"> <span id="bluetext">Dashboard</span></a>
+            <span><i class="fas fa-angle-right"></i></span>
+            <a href="{% url 'doctors' %}"> <span id="bluetext">Patients</span></a>
+            
+        </p>
+    </div>
+</div>
+<div class="doctors-list d-grid">
+    <nav>
+        <ul>
+            {% for app in doctor_app %}
+            <li>
+                <a href="{% url 'patient-profile' app.patient.id %}">
+                    <div class="row">
+                        <div class="profileimage">
+                            <img src="{{ app.patient.usersinfo.profile_picture.url }}" alt="">
+                        </div>
+                        <div class="name">
+                            <h4>{{ app.patient.first_name }} {{ app.patient.last_name }} </h4>
+                        </div>
+                        
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+</div>
+
+{% endblock %}
