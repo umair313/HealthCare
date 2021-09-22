@@ -41,7 +41,8 @@
         </div>
         <div class="remarkds-form-section shadow br-6">
             <div class="remarks-form-container">
-                <form action="">
+                <form action="{% url 'complete-appointment' appointment.id %}" method="POST">
+                    {% csrf_token %}
                    <div class="remarks-form">
                     <div class="form-item">
                         <label class="form-label">Disease</label>
