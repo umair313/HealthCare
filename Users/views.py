@@ -235,3 +235,10 @@ def patients(request):
 def patient_profile(request,patient_id):
     patient = User.objects.filter(id=patient_id).first()
     return render(request, "users/patient_profile.html",context={"patient":patient})
+
+
+
+
+@login_required
+def view_appointment(request,id):
+    return redirect(request, "users/view_appointment.html")
