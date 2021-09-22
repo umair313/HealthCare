@@ -241,4 +241,4 @@ def patient_profile(request,patient_id):
 
 @login_required
 def view_appointment(request,id):
-    return redirect(request, "users/view_appointment.html")
+    return render(request, "users/view_appointment.html")
