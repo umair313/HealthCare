@@ -263,9 +263,41 @@ def attend_appointment_form(request,id):
     medicine = MedicineForm()
     disease = DiseaseForm()
     context = {
+        "appointment":appointment,
         "symptom" : symptom,
         "test": test,
         "medicine":medicine,
         "disease": disease,
     }
     return render(request, "users/attend_appointment.html",context=context)
+
+@login_required
+def complete_appointment(request,id):
+    appointment = Appointment.objects.filter(id=id).first()
+    symptom = appointment.symptom_set.first()
+    test = appointment.testresult_set.first()
+    medicine = appointment.medicine_set.first()
+    disease = appointment.disease_set.first()
+    if request.method == "POST":
+        disease_form_data = DiseaseForm(request.POST)
+        medicine_form_data = MedicineForm(request.POST)
+        if disease_form_data.is_valid() and medicine_form_data.is_valid():
+            medicine.medicine = medicine_form_data.cleaned_data["medicine"]
+            disease.disease = disease_form_data.cleaned_data["disease"]
+            medicine.save()
+            disease.save()
+
+            current = CurrentAppointments.objects.filter(doctor_id= request.user.id).first()
+            print(f"current : {current}")
+            current.appointments -= 1
+            current.save()
+            appointment.status = "Attended"
+            appointment.save()
+        context = {
+            "appointment":appointment,
+            "symptom" : symptom,
+            "test": test,
+            "medicine":medicine,
+            "disease": disease,
+        }
+        return render(request, "users/view_appointment.html",context=context)
