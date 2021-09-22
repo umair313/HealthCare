@@ -27,7 +27,7 @@
                 </tr>
                 {% for app in appointments%}
                 <tr>
-                    <td>{{ app.date|date:"M n, Y" }} - {{ app.time|time:"h:i A" }}</td>
+                    <td>{{ app.date|date:"M j, Y" }} - {{ app.time|time:"h:i A" }}</td>
                     <td>{{ app.doctor.first_name }} {{ app.doctor.last_name }}</td>
                     <td>{{ app.status }}</td>
                     <td><a href="{% url 'view-appointment' app.id %}" class="btn btn-view">view</a></td>
@@ -42,7 +42,7 @@
                 </tr>
             {% for app in appointments%}
             <tr>
-                <td>{{ app.date|date:"M n, Y" }} - {{ app.time|time:"h:i A" }}</td>
+                <td>{{ app.date|date:"M j, Y" }} ok- {{ app.time|time:"h:i A" }}</td>
                 <td>{{ app.patient.first_name }} {{ app.patient.last_name }}</td>
                 <td>{{ app.status }}</td>
                 {% if app.status == "pending" %}
