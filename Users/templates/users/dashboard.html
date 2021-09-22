@@ -22,7 +22,7 @@
                 </a>
             </p>
         </div>
-        {% if user_info.role != "doctor" %}
+        {% if user.usersinfo.role != "doctor" %}
         <div class="ds-appintment-btn m-left-auto">
             <p>
                 <a href="{% url 'doctors' %}" class="shadow">
@@ -33,7 +33,7 @@
         {% endif %}
     </div>
 
-    {% if user_info.role == "doctor" %}            
+    {% if user.usersinfo.role == "doctor" %}            
         <div class="report-section shadow br-6">
             <div class="appointment-chart">
                 <h2>Appointments Each month</h2>
