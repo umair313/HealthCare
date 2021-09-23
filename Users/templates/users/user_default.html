@@ -167,8 +167,9 @@
 
         </script>
 
-       {% if not profile%}
+       {% if user.usersinfo.role == "doctor"%}
        <script>
+        //    Chart Area for admin
         var appointment_cvx = document.getElementById("appointmentChart").getContext("2d");
         var disease_cvx = document.getElementById("diseaseChart").getContext("2d");
     
@@ -197,7 +198,8 @@
                 }
             });
     
-            var disease_chart = new Chart(disease_cvx,{
+        var disease_chart = new Chart(disease_cvx,{
+
                 type: "bar",
                 data:{
                     labels : ["Covid","Flue","Heart","Kidny","Infection"],
@@ -216,6 +218,34 @@
                 },
                 options:{},
             });
+
+    // months
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+    // getting current date
+    const currentDate = new Date();
+    
+    const displayMonth = document.querySelector(".month")
+    displayMonth.dataset.monthIndex = currentDate.getMonth();
+    displayMonth.innerHTML = months[currentDate.getMonth()]
+    
+
+    const handleButtonClick = (evt) => {
+        const clickLeft = evt.target.closest('div').classList.contains('left')
+        const displayMonth = evt.target.closest('.tabs').querySelector('.month')
+        let index = Number(displayMonth.dataset.monthIndex)
+        if (clickLeft)
+            index = index - (index > 0 ? 1 : 0)
+        else
+            index = index + (index < months.length - 1 ? 1 : 0)
+        displayMonth.dataset.monthIndex = index
+        displayMonth.innerHTML = months[index]
+
+    }
+    document.querySelectorAll('.tabs button').forEach(b => {
+      b.addEventListener('click', handleButtonClick)
+    })
+
+
     </script>
        {%endif%}
        <script>
