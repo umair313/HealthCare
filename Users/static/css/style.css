@@ -451,6 +451,39 @@ i.fa-cog:hover{
     border-left: 5px solid var(--main-font-color);
     
 }
+
+.tab-wrapper {
+    display: inline-block;
+  }
+  .tabs {
+    display: flex;
+    align-items: center;
+    background: #eee;
+    border-radius: 6px;
+  }
+  .tabs div.month {
+    width: 4em;
+    text-align: center;
+  }
+  .left button, .right button{
+    padding: 10px 20px;
+    font-weight: bold;
+    background: var(--primary-btn-color);
+    color: #fff;
+
+  }
+  .tabs button {
+    cursor: pointer;
+    border: 0;
+  }
+  .right button {
+      border-radius: 0 6px 6px 0;
+    border-left: 1px solid white;
+  }
+  .left button{
+      border-radius: 6px 0 0 6px;
+    border-right: 1px solid white;
+  }
 /* .main-content{
     
 } */
@@ -757,10 +790,13 @@ background-color: #fff;
 }
 
 
-
+.report-section .tab-wrapper{
+    padding: 10px;
+    margin: 14px;
+}
 .chart-section{
     margin: 14px;
-    width: 90%;
+    width: 60%;
     
 }
 
