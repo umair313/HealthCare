@@ -20,10 +20,14 @@ If the slot is availbe then you can provide other information and book your Appo
 
 
 # Create your views here.
+
+
 def Home(request):
     user = request.user
     if user.is_authenticated:
+        if user.usersinfo.role != "doctor":
             return render(request,"users/dashboard.html")
+        return render(request,"users/dashboard.html")
     return render(request,"users/index.html")
 
 
