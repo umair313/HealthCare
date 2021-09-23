@@ -37,6 +37,19 @@
         <div class="report-section shadow br-6">
             <div class="appointment-chart">
                 <h2>Appointments Each month</h2>
+                <!-- tabs for months -->
+                <div class="tab-wrapper">
+                    <div class="tabs">
+                      <div class="left">
+                        <button type="button"> &lt;  </button>
+                      </div>
+                      <div class="month" data-month-index="0">Jan</div>
+                      <div class="right">
+                        <button type="button"> &gt; </button>
+                      </div>
+                    </div>
+                </div>
+                <!-- ended -->
                 <div class="chart-section">
                     <canvas id="appointmentChart"></canvas>
                 </div>
