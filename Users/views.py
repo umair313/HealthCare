@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.http.response import JsonResponse
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import (MedicineForm, userRegistrationForm ,UserInfoForm,
@@ -7,7 +8,7 @@ from .forms import (MedicineForm, userRegistrationForm ,UserInfoForm,
 from .models import (UsersInfo, DoctorInfo, Appointment, 
                         CurrentAppointments, Medicine, Disease)
 
-
+from collections import Counter
 
 
 
@@ -321,3 +322,53 @@ def complete_appointment(request,id):
             "disease": disease,
         }
         return render(request, "users/view_appointment.html",context=context)
+
+
+
+
+# request from ajax for disease data for current doctor
+def disease_chart_data(request):
+
+    disease_counter = Counter()
+    disease_list = []
+    doctor = request.user
+    for app in doctor.appointment_doctor.all():
+        disease = app.disease_set.first().disease
+        disease_list.append(disease)
+    for d in disease_list:
+        disease_counter[d] += 1
+    keys = list(disease_counter.keys())
+    values = list(disease_counter.values())
+
+    data = {
+        "disease": keys,
+        "values": values
+    }
+    return JsonResponse(data)
+
+
+# ajax
+
+def test(request):
+    return render(request, "users/test.html")
+
+# def ajaxTest(request):
+#     print("Request From ajax")
+#     data = "Hi there"
+#     return HttpResponse(data)
+
+
+# def get_disease(request):
+#     disease_counter = Counter()
+#     disease_list = []
+#     doctor = request.user
+#     for app in doctor.appointment_doctor.all():
+#         disease = app.disease_set.first().disease
+#         disease_list.append(disease)
+#     for d in disease_list:
+#         disease_counter[d] += 1
+#     data = {
+#         "disease": disease_counter.keys(),
+#         "values": disease_counter.values()
+#     }
+#     return JsonResponse(data)
