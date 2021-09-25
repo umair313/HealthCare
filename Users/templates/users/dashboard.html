@@ -35,6 +35,7 @@
 
     {% if user.usersinfo.role == "doctor" %}            
         <div class="report-section shadow br-6">
+        
             <div class="appointment-chart">
                 <h2 id="appformonth">Appointments Each month</h2>
                 {% csrf_token %}
