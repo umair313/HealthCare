@@ -1,9 +1,11 @@
 from os import name
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import (Home, register, profile_view, patient_profile,view_appointment,complete_appointment,
-                    doctors_list_view, doctor_profile,makeAppointmentForm,attend_appointment_form,
-                    bookAppointment, all_appointments,patients, searchpage,search, test,disease_chart_data, get_appointments_by_month)
+from .views import (Home, register, profile_view, patient_profile,view_appointment,
+                        pending_appointment,complete_appointment,doctors_list_view,
+                        doctor_profile,makeAppointmentForm,attend_appointment_form,
+                        bookAppointment, all_appointments,patients, searchpage,search, 
+                        test,disease_chart_data, get_appointments_by_month)
 
 urlpatterns = [
     # home
@@ -33,7 +35,9 @@ urlpatterns = [
     # common in patient and doctor
     path("patient/profile/<int:patient_id>/",patient_profile,name="patient-profile"),
     path("view/appointment/<int:id>/",view_appointment,name="view-appointment"),
-
+    
+    # ajax request for pending apoointment count
+    path("appointment/pending/",pending_appointment,name="pending-appointment"),
     #  for ajax test
     path("test/",test,name="test"),
 

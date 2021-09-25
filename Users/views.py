@@ -401,6 +401,24 @@ def get_appointments_by_month(request):
     # send json response
     return JsonResponse(data)
 
+
+# total pending appointment
+def pending_appointment(request):
+    # get the user from session
+    # if appointment for user based on role
+    # count he pending appointments
+    user = request.user
+    if user:
+        if user.usersinfo.role == "patient":
+            count = Appointment.objects.filter(patient_id = user.id, status = "pending").count()
+        else:
+            count = Appointment.objects.filter(doctor_id = user.id, status = "pending").count()
+
+    data = {
+        "count" : count if count else 0
+    }
+    return JsonResponse(data)
+
 def test(request):
     return render(request, "users/test.html")
 
