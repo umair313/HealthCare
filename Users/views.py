@@ -373,7 +373,7 @@ def get_appointments_by_month(request):
     days = [day for day in range(1, month_len + 1 )]
     
     # query for appointment for current yaear and given month
-    appointments = Appointment.objects.filter(date__month=month,date__year=year)
+    appointments = Appointment.objects.filter(doctor_id=user.id, date__month=month,date__year=year)
 
     # add day of each appointment to the list
     for appointment in appointments:
