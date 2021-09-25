@@ -248,9 +248,13 @@ def all_appointments(request):
 @login_required
 def patients(request):
     user = request.user
+    patients = []
     if user.usersinfo.role == "doctor":
         appointments = user.appointment_doctor.all()
-        return render(request,"users/patients.html",context={"doctor_app":appointments})
+        for app in appointments:
+            patients.append(app.patient)
+        patients= list(set(patients))
+        return render(request,"users/patients.html",context={"patients":patients})
 
 
 
