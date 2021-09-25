@@ -3,7 +3,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from .views import (Home, register, profile_view, patient_profile,view_appointment,complete_appointment,
                     doctors_list_view, doctor_profile,makeAppointmentForm,attend_appointment_form,
-                    bookAppointment, all_appointments,patients, searchpage,search, test,disease_chart_data)
+                    bookAppointment, all_appointments,patients, searchpage,search, test,disease_chart_data, get_appointments_by_month)
 
 urlpatterns = [
     # home
@@ -29,7 +29,7 @@ urlpatterns = [
     path("patients/",patients,name="patients"),
     # doctor ajax requests urls
     path("data/chart/disease/",disease_chart_data,name="disease-chart-data"),
-    
+    path("data/chart/appointments",get_appointments_by_month,name="month-appointment"),
     # common in patient and doctor
     path("patient/profile/<int:patient_id>/",patient_profile,name="patient-profile"),
     path("view/appointment/<int:id>/",view_appointment,name="view-appointment"),
