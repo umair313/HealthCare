@@ -174,7 +174,7 @@
 
     </script>
 
-    {% if user.usersinfo.role == "doctor"%}
+    {% if chart %}
     <script>
         // months
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -289,6 +289,14 @@
 
         document.getElementById("disease").onload = getDiseaseChartData();
 
+    </script>
+    {%endif%}
+    <script>
+        $(function () {
+            $("#datepicker").datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
         function pendingAppintment(){
             const xhr = new XMLHttpRequest()
             xhr.open("GET","{% url 'pending-appointment' %}")
@@ -300,15 +308,6 @@
             xhr.send()
         }
         document.getElementById("pending-appointment").onload = pendingAppintment()
-
-    </script>
-    {%endif%}
-    <script>
-        $(function () {
-            $("#datepicker").datepicker({
-                format: 'yyyy-mm-dd'
-            });
-        });
     </script>
 
 </body>
