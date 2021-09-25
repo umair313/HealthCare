@@ -13,15 +13,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700&display=swap" rel="stylesheet">
     <!-- heathcare style css -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    
+
     <!-- Place your kit's code here for fontawesome -->
 
     <!-- <link rel="stylesheet" href="{% static '/css/all.min.css' %}"> -->
     <!-- Fengyuan Chen’s Datepicker -->
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css" 
-    integrity="sha512-YdYyWQf8AS4WSB0WWdc3FbQ3Ypdm0QCWD2k4hgfqbQbRCJBEgX0iAegkl2S1Evma5ImaVXLBeUkIlP6hQ1eYKQ==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css"
+        integrity="sha512-YdYyWQf8AS4WSB0WWdc3FbQ3Ypdm0QCWD2k4hgfqbQbRCJBEgX0iAegkl2S1Evma5ImaVXLBeUkIlP6hQ1eYKQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>Patients Dashboard</title>
 </head>
@@ -32,7 +32,7 @@
             <div class="brand">
                 <h2><a href="{% url 'Home' %}">HealthCare</a></h2>
             </div>
-            
+
             <div class="settingicon">
                 <i class="fas fa-cog"></i>
                 <div class="settingsblock">
@@ -63,7 +63,7 @@
             <div class="sidemenu">
                 <nav>
                     <ul>
-                        
+
                         {% if user.usersinfo.role == 'doctor' %}
                         <li><a href="{% url 'patients'%}">Patients</a></li>
                         <li><a href="{% url 'appointments' %}">Appointments</a></li>
@@ -75,59 +75,59 @@
                         {%endif%}
                     </ul>
                 </nav>
-        
+
             </div>
             <div class="main-content">
-            {% if profile %}
+                {% if profile %}
                 {% block profile_view %}
                 {% endblock %}
-            {% endif %}
+                {% endif %}
 
-            {% if doctors %}
+                {% if doctors %}
                 {% block doctor_list_block %}
                 {% endblock%}
-            {% endif %}
+                {% endif %}
 
-           
-            {% block dashboard %}
-            {% endblock %}
-           
 
-            {% if do_appointment %}
+                {% block dashboard %}
+                {% endblock %}
+
+
+                {% if do_appointment %}
                 {%block make_appointment%}
                 {% endblock %}
-            {% endif%}
+                {% endif%}
 
-            {% if doctor_profile %}
+                {% if doctor_profile %}
                 {% block doctor_profile_view %}
                 {% endblock %}
-            {% endif %}
+                {% endif %}
 
 
-            {% block appointments %}
-            {% endblock %}
+                {% block appointments %}
+                {% endblock %}
 
-            {% block patients_list_block %}
-            {% endblock%}
-            
-            {% block patient_profile_view %}
-            {% endblock %}
+                {% block patients_list_block %}
+                {% endblock%}
 
-            {% block view_appointment %}
-            {% endblock %}
+                {% block patient_profile_view %}
+                {% endblock %}
 
-            {% block attend_appointment %}
-            {% endblock %}
+                {% block view_appointment %}
+                {% endblock %}
 
-            {% block search %}
-            {% endblock %}
+                {% block attend_appointment %}
+                {% endblock %}
 
-        </div> <!-- main content -->
-    </div><!-- main-body ends here-->
+                {% block search %}
+                {% endblock %}
+
+            </div> <!-- main content -->
+        </div><!-- main-body ends here-->
     </div> <!-- main body ends here--->
-        <footer>
+    <footer>
 
-        </footer>
+    </footer>
     </div> <!-- Container ends here-->
 
 
@@ -135,170 +135,181 @@
     <script src="https://kit.fontawesome.com/9ce9c6ea4b.js" crossorigin="anonymous"></script>
 
     <!-- Charts.js  -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" 
-    integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"
+        integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
 
     <!-- Fengyuan Chen’s Datepicker -->
-    
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" 
-    integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script>
-
-            var settingIcon = document.getElementsByClassName("fa-cog")[0];
-            var settingsBlock = document.getElementsByClassName("settingsblock")[0];
-            settingsBlock.style.display = "none";
-            settingIcon.addEventListener("click", function () {
-                if (settingsBlock.style.display !== "block") {
-                    settingIcon.style.color = "#2964c8";
-                    settingIcon.style.transform = "rotate(60deg)";
-                    settingsBlock.style.transition = "all 5s";
-                    settingsBlock.style.display = "block";
 
 
-                } else {
-                    settingIcon.style.color = "#136ff8";
-                    settingIcon.style.transform = "rotate(0deg)";
-                    settingsBlock.style.display = "none";
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js"
+        integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+
+        var settingIcon = document.getElementsByClassName("fa-cog")[0];
+        var settingsBlock = document.getElementsByClassName("settingsblock")[0];
+        settingsBlock.style.display = "none";
+        settingIcon.addEventListener("click", function () {
+            if (settingsBlock.style.display !== "block") {
+                settingIcon.style.color = "#2964c8";
+                settingIcon.style.transform = "rotate(60deg)";
+                settingsBlock.style.transition = "all 5s";
+                settingsBlock.style.display = "block";
+
+
+            } else {
+                settingIcon.style.color = "#136ff8";
+                settingIcon.style.transform = "rotate(0deg)";
+                settingsBlock.style.display = "none";
+            }
+
+        });
+
+    </script>
+
+    {% if user.usersinfo.role == "doctor"%}
+    <script>
+        // months
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        // getting current date
+        const currentDate = new Date();
+
+        const displayMonth = document.querySelector(".month")
+        displayMonth.dataset.monthIndex = currentDate.getMonth();
+        displayMonth.innerHTML = months[currentDate.getMonth()]
+
+
+        const handleButtonClick = (evt) => {
+            const clickLeft = evt.target.closest('div').classList.contains('left')
+            const displayMonth = evt.target.closest('.tabs').querySelector('.month')
+            let index = Number(displayMonth.dataset.monthIndex)
+            if (clickLeft)
+                index = index - (index > 0 ? 1 : 0)
+            else
+                index = index + (index < months.length - 1 ? 1 : 0)
+            displayMonth.dataset.monthIndex = index
+            displayMonth.innerHTML = months[index]
+            getAppointment(index, currentDate.getFullYear())
+        }
+        document.querySelectorAll('.tabs button').forEach(b => {
+            b.addEventListener('click', handleButtonClick)
+        })
+
+
+        var appointment_cvx = document.getElementById("appointmentChart").getContext("2d");
+        var appointment_chart = new Chart(appointment_cvx, {
+            type: "bar",
+            data: {},
+            options: {
+                position: "right"
+            }
+        });
+
+        function getAppointment(month, year) {
+            //    Chart Area for admin
+            const xhr = new XMLHttpRequest()
+            xhr.open("POST", "{% url 'month-appointment' %}")
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+            xhr.setRequestHeader("X-CSRFToken", document.querySelector('[name=csrfmiddlewaretoken]').value)
+            xhr.onload = function () {
+
+                const rjson = JSON.parse(this.responseText)
+                data = {
+                    labels: rjson.days,
+                    datasets: [{
+                        label: "Appointments",
+                        data: rjson.appointment,
+                        backgroundColor: [
+                            "#3e3d3d",
+                            "Orange",
+                            "Green",
+                            "Blue",
+                            "Purple",
+                            "Red",
+                            "Yellow",
+                            "Gray",
+                        ],
+
+                    }]
                 }
 
-            });
+                appointment_chart.data = data
+                appointment_chart.update()
 
-        </script>
+            } // onload ends here
+            xhr.send("month=" + month + "&" + "year=" + year)
 
-       {% if user.usersinfo.role == "doctor"%}
-       <script>
-    // months
-    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
-    // getting current date
-    const currentDate = new Date();
+        }
 
-    const displayMonth = document.querySelector(".month")
-    displayMonth.dataset.monthIndex = currentDate.getMonth();
-    displayMonth.innerHTML = months[currentDate.getMonth()]
-    
+        document.getElementById("appformonth").onload = getAppointment(currentDate.getMonth(), currentDate.getFullYear())
 
-    const handleButtonClick = (evt) => {
-        const clickLeft = evt.target.closest('div').classList.contains('left')
-        const displayMonth = evt.target.closest('.tabs').querySelector('.month')
-        let index = Number(displayMonth.dataset.monthIndex)
-        if (clickLeft)
-            index = index - (index > 0 ? 1 : 0)
-        else
-            index = index + (index < months.length - 1 ? 1 : 0)
-        displayMonth.dataset.monthIndex = index
-        displayMonth.innerHTML = months[index]
-        getAppointment(index,currentDate.getFullYear())
-    }
-    document.querySelectorAll('.tabs button').forEach(b => {
-      b.addEventListener('click', handleButtonClick)
-    })
+        // get disease data for char for current doctor
+        function getDiseaseChartData() {
+            const xhr = new XMLHttpRequest()
+            xhr.open("GET", "{% url 'disease-chart-data' %}")
+            xhr.onload = function () {
 
+                const rjson = JSON.parse(this.responseText)
+                var disease_cvx = document.getElementById("diseaseChart").getContext("2d");
+                var disease_chart = new Chart(disease_cvx, {
+                    type: "bar",
+                    data: {
+                        labels: rjson.disease,
+                        datasets: [{
+                            label: "Disease",
+                            data: rjson.values,
+                            backgroundColor: [
+                                "black",
+                                "red",
+                                "green",
+                                "yellow",
+                                "purple"
 
-    var appointment_cvx = document.getElementById("appointmentChart").getContext("2d");
-    var appointment_chart = new Chart(appointment_cvx,{
-                                            type: "bar",
-                                            data: {},
-                                            options:{
-                                                position: "right"
-                                            }
-                                        });
+                            ]
+                        }],
+                    },
+                    options: {
 
-    function getAppointment(month,year){
-                //    Chart Area for admin
-        alert("sending")
-        const xhr = new XMLHttpRequest()
-        xhr.open("POST", "{% url 'month-appointment' %}")
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        xhr.setRequestHeader("X-CSRFToken", document.querySelector('[name=csrfmiddlewaretoken]').value)
-        xhr.onload = function(){
+                        barPercentage: 1,
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                });
+            } // onload ends here
+            xhr.send()
+        }
 
-            const rjson = JSON.parse(this.responseText)
-            alert("ok get the rjson")
-            data = {
-                labels: rjson.days,
-                datasets:[{
-                    label: "Appointments",
-                    data: rjson.appointment,
-                    backgroundColor: [
-                    "#3e3d3d",
-                    "Orange",
-                    "Green",
-                    "Blue",
-                    "Purple",
-                    "Red",
-                    "Yellow",
-                    "Gray",
-                    ],
+        document.getElementById("disease").onload = getDiseaseChartData();
 
-                }]
+        function pendingAppintment(){
+            const xhr = new XMLHttpRequest()
+            xhr.open("GET","{% url 'pending-appointment' %}")
+
+            xhr.onload = function(){
+                const rjson = JSON.parse(this.responseText)
+                document.getElementById("pending-appointment").innerHTML = "Pending Appointment(s): "+ rjson.count
             }
-            
-            appointment_chart.data = data
-            appointment_chart.update()
-            
-        } // onload ends here
-        xhr.send("month="+month+"&"+"year="+year)
-    
-    }
-        
-    document.getElementById("appformonth").onload = getAppointment(currentDate.getMonth(),currentDate.getFullYear())
+            xhr.send()
+        }
+        document.getElementById("pending-appointment").onload = pendingAppintment()
 
-    // get disease data for char for current doctor
-    function getDiseaseChartData(){
-        const xhr = new XMLHttpRequest()
-        xhr.open("GET","{% url 'disease-chart-data' %}")
-        xhr.onload = function(){
-
-            const rjson = JSON.parse(this.responseText)
-            var disease_cvx = document.getElementById("diseaseChart").getContext("2d");
-            var disease_chart = new Chart(disease_cvx,{
-                                        type: "bar",
-                                        data:{
-                                            labels : rjson.disease,
-                                            datasets:[{
-                                                label: "Disease",
-                                                data: rjson.values,
-                                                backgroundColor:[
-                                                    "black",    
-                                                    "red",
-                                                    "green",
-                                                    "yellow",
-                                                    "purple"
-
-                                                ]
-                                            }],
-                                        },
-                                        options:{
-
-                                            barPercentage:1,
-                                                    y: {
-                                                        beginAtZero: true
-                                                    }
-                                        },
-                            });
-        } // onload ends here
-        xhr.send()
-    }
-    
-    document.getElementById("disease").onload = getDiseaseChartData();
     </script>
-       {%endif%}
-       <script>
+    {%endif%}
+    <script>
         $(function () {
-          $("#datepicker").datepicker({
-            format: 'yyyy-mm-dd'
-          });
+            $("#datepicker").datepicker({
+                format: 'yyyy-mm-dd'
+            });
         });
-      </script>
+    </script>
 
 </body>
 
