@@ -30,7 +30,7 @@ def Home(request):
     if user.is_authenticated:
         if user.usersinfo.role != "doctor":
             return render(request,"users/dashboard.html")
-        return render(request,"users/dashboard.html")
+        return render(request,"users/dashboard.html" ,context={"chart":True})
     return render(request,"users/index.html")
 
 
