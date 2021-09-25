@@ -26,7 +26,7 @@
                     <th>Status</th>
                     <th></th>
                 </tr>
-                {% for app in appointments%}
+                {% for app in appointments reversed %}
                 <tr>
                     <td>{{ app.date|date:"M j, Y" }} - {{ app.time|time:"h:i A" }}</td>
                     <td>{{ app.doctor.first_name }} {{ app.doctor.last_name }}</td>
@@ -41,7 +41,7 @@
                     <th>Status</th>
                     <th></th>
                 </tr>
-                {% for app in appointments%}
+                {% for app in appointments reversed%}
                 <tr>
                     <td>{{ app.date|date:"M j, Y" }} ok- {{ app.time|time:"h:i A" }}</td>
                     <td>{{ app.patient.first_name }} {{ app.patient.last_name }}</td>
