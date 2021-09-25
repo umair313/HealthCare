@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.http.request import validate_host
 from django.http.response import JsonResponse
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -9,6 +10,7 @@ from .models import (UsersInfo, DoctorInfo, Appointment,
                         CurrentAppointments, Medicine, Disease)
 
 from collections import Counter
+import calendar
 
 
 
@@ -347,28 +349,60 @@ def disease_chart_data(request):
     return JsonResponse(data)
 
 
-# ajax
+
+
+
+def get_appointments_by_month(request):
+    # list of days for each appointment
+    appointment_days = []
+    
+    # counter to count appointment(s) per day
+    appointment_counter = Counter()
+    
+    # get the current user from session
+    user = request.user
+    
+    # get post requet data
+    month = int(request.POST["month"]) + 1
+    year = int(request.POST["year"])
+    
+    # get number od days in month
+    _, month_len = calendar.monthrange(year=year, month=month)
+    
+    # create list of days for the given month 1 - month_len
+    days = [day for day in range(1, month_len + 1 )]
+    
+    # query for appointment for current yaear and given month
+    appointments = Appointment.objects.filter(date__month=month,date__year=year)
+
+    # add day of each appointment to the list
+    for appointment in appointments:
+        appointment_day = appointment.date.day
+        appointment_days.append(appointment_day)
+
+    # count appointment per day
+    for day in appointment_days:
+        appointment_counter[day] += 1
+
+    # create the dictionary containing all the days
+    # if day has appointment then assign total appointment for that day
+    # otherwise set to 0  
+    date_dict = {}
+    for day in days:
+        if day in appointment_counter:
+            date_dict[day] = appointment_counter[day]
+        else:
+            date_dict[day] = 0
+    # prepar data for response
+    data = {
+        "days": list(date_dict.keys()),
+        "appointment": list(date_dict.values())
+    }
+    # send json response
+    return JsonResponse(data)
 
 def test(request):
     return render(request, "users/test.html")
 
-# def ajaxTest(request):
-#     print("Request From ajax")
-#     data = "Hi there"
-#     return HttpResponse(data)
 
 
-# def get_disease(request):
-#     disease_counter = Counter()
-#     disease_list = []
-#     doctor = request.user
-#     for app in doctor.appointment_doctor.all():
-#         disease = app.disease_set.first().disease
-#         disease_list.append(disease)
-#     for d in disease_list:
-#         disease_counter[d] += 1
-#     data = {
-#         "disease": disease_counter.keys(),
-#         "values": disease_counter.values()
-#     }
-#     return JsonResponse(data)
