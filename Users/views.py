@@ -1,5 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.http.response import HttpResponseRedirect
+from django.urls import reverse
+
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from .forms import userRegistrationForm ,UserInfoForm,DoctorInfoForm
@@ -21,6 +24,8 @@ If the slot is availbe then you can provide other information and book your Appo
 def Home(request):
     user = request.user
     if user.is_authenticated:
+        if user.is_staff:
+            return HttpResponseRedirect(reverse("admin:index"))
         if user.usersinfo.role != "doctor":
             return render(request,"users/dashboard.html")
         return render(request,"users/dashboard.html" ,context={"chart":True})
