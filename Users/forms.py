@@ -1,8 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.forms import widgets
-from .models import DoctorInfo,UsersInfo, Appointment, Symptom, TestResult, Medicine, Disease
+from .models import DoctorInfo,UsersInfo
 
 
 
@@ -25,7 +24,7 @@ class UserInfoForm(forms.ModelForm):
     age = forms.IntegerField()
     city = forms.CharField(max_length=20)
     country = forms.CharField(max_length=20)
-    mobile_number = forms.IntegerField()
+    mobile_number = forms.CharField(max_length=24)
 
     class Meta:
         model = UsersInfo
@@ -43,35 +42,3 @@ class DoctorInfoForm(forms.ModelForm):
     class Meta:
         model = DoctorInfo
         fields = ["qualification","expertise"]
-
-class AppointmentForm(forms.ModelForm):
-    date = forms.DateField(widget=forms.DateInput(attrs={"id":"datepicker"}))
-
-    class Meta:
-        model = Appointment
-        fields = ["date","time"]
-
-class SymtomsForm(forms.ModelForm):
-    symptom = forms.Textarea()
-    class Meta:
-        model = Symptom
-        fields = ["symptom"]
-
-
-
-class TestResultForm(forms.ModelForm):
-    class Meta:
-        model = TestResult
-        fields = ["blood_pressure","blood_sugar","bmi","hemoglobin","platelets"]
-
-
-
-class MedicineForm(forms.ModelForm):
-    class Meta:
-        model = Medicine
-        fields = ["medicine"]
-
-class DiseaseForm(forms.ModelForm):
-    class Meta:
-        model = Disease
-        fields = ["disease"]
