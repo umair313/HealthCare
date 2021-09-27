@@ -1,0 +1,79 @@
+{% extends 'users/user_default.html'%}
+{% load static %}
+{% block make_appointment %}
+<div class="backlink d-grid">
+    <div class="navigation-info d-flex">
+        <p>
+            <span id="bluetext">/</span>
+            <span><i class="fas fa-angle-right"></i></span>
+            <a href="{% url 'Home' %}"> <span id="bluetext">Dashboard</span></a>
+            <span><i class="fas fa-angle-right"></i></span>
+            <span id="bluetext">Booking Appointment</span>
+            <span><i class="fas fa-angle-right"></i></span>
+            <a href="{% url 'view-doctor-profile' doctor_id %}"><span id="bluetext">Dr. Umair</span></a>
+        </p>
+    </div>
+    <div class="appointment-section d-flex">
+        <div class="appointment-box br-6 shadow">
+            {% if messages %}
+                {% for message in messages%}
+                <div class="{{ message.tags}} br-6">
+                    <p>{{ message }}</p>
+                </div>
+                {% endfor %}
+            {% endif %}
+            <form action="{% url 'book' doctor_id %}" method="POST" class="form-group">
+                {% csrf_token %}
+                <input type="hidden" name="doctor_id" value="{{ doctor_id }}">
+                <div class="form-item d-flex">
+                    <label class="form-label">Date</label>
+                    <input id="datepicker" class="form-field" name="date">
+
+                </div>
+                
+                <div class="form-item d-flex">
+                    <label class="form-label">Time</label>
+                    <input type="time" name ="time" class="form-field">
+                    
+                </div>
+                <div class="form-item d-flex">
+                    <label class="form-label">Symtoms</label>
+                 
+                    {{ symptomForm.symptom }}
+                </div>
+
+                <div class="form-item d-flex">
+                    <label class="form-label">Blood Presure</label>
+                 
+                    {{ test_result_form.blood_pressure }}
+                </div>
+                <div class="form-item d-flex">
+                  <label class="form-label">Body to Mass Index</label>
+                  {{ test_result_form.bmi }}
+                 
+              </div>
+                <div class="form-item d-flex">
+                    <label class="form-label">Blood Sugar</label>
+                    {{ test_result_form.blood_sugar }}
+                   
+
+                </div>
+                <div class="form-item d-flex">
+                    <label class="form-label">Hemoglobin</label>
+                    {{ test_result_form.hemoglobin }}
+                   
+                </div>
+                <div class="form-item d-flex">
+                    <label class="form-label">Platelets</label>
+                    {{ test_result_form.platelets }}
+                    
+                </div>
+                <div class="form-item ">
+                    <button class="btn btn-form">Book</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

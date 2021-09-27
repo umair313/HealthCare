@@ -1,0 +1,57 @@
+{% extends 'users/user_default.html'%}
+{% load static %}
+{% block view_appointment %}
+<div class="backlink d-grid">
+    <div class="navigation-info d-flex">
+        <p>
+            <a href="{% url 'Home' %}"> <span id="bluetext">Dashboard</span></a>
+            <span><i class="fas fa-angle-right"></i></span>
+            <span id="bluetext">Appointment</span>
+        </p>
+    </div>
+</div>
+<div class="dahsboard-container">
+    <div class="appointment-data-section d-grid ">
+        <div class="appinfo appointment-data d-grid">
+            <div class="data-box br-6">
+                <h4>Symptoms</h4>
+                <p>{{ symptom.symptom }}</p>
+            </div>
+            <div class="data-box br-6">
+                <h4>Blood Pressure</h4>
+                <p>{{ test.blood_pressure }}</p>
+            </div>
+            <div class="data-box br-6">
+                <h4>Blood Sugar</h4>
+                <p>{{ test.blood_sugar }}</p>
+            </div>
+            <div class="data-box br-6">
+                <h4>Hemoglobin</h4>
+                <p>{{ test.hemoglobin }}</p>
+            </div>
+            <div class="data-box br-6">
+                <h4>Body Mass Index</h4>
+                <p>{{ test.bmi }}</p>
+            </div>
+            <div class="data-box br-6">
+                <h4>Platelets</h4>
+                <p>{{ test.platelets }}</p>
+            </div>
+
+        </div>
+        <div class="br-6">
+          <div class="appointment-data">
+              <div class="data-box br-6">
+                  <h4>Disease</h4>
+                  <p> {{ disease.disease}}</p>
+              </div>
+              <div class="data-box br-6">
+                  <h4>Medicine</h4>
+                  <p> {{ medicine.medicine }}</p>
+              </div>
+
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
