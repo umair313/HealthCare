@@ -43,7 +43,7 @@
                 </tr>
                 {% for app in appointments reversed%}
                 <tr>
-                    <td>{{ app.date|date:"M j, Y" }} ok- {{ app.time|time:"h:i A" }}</td>
+                    <td>{{ app.date|date:"M j, Y" }} | {{ app.time|time:"h:i A" }}</td>
                     <td>{{ app.patient.first_name }} {{ app.patient.last_name }}</td>
                     <td>{{ app.status }}</td>
                     {% if app.status == "pending" %}
