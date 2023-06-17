@@ -79,30 +79,30 @@ WSGI_APPLICATION = 'HeatlhCare.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'mssql',
-        'NAME': 'Test',
-        # 'USER': 'AbdulMir',
-        'USER': '',
-        # 'PASSWORD': 'Afghanistan8*',
-        'PASSWORD': '',
-        'HOST': 'NARUTO',
-        'PORT': '',
-        'TrustedConnection': 'True',
-
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
-        },
-    },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'mssql',
+#         'NAME': 'Test',
+#         # 'USER': 'AbdulMir',
+#         'USER': '',
+#         # 'PASSWORD': 'Afghanistan8*',
+#         'PASSWORD': '',
+#         'HOST': 'NARUTO',
+#         'PORT': '',
+#         'TrustedConnection': 'True',
+
+#         'OPTIONS': {
+#             'driver': 'ODBC Driver 17 for SQL Server',
+#         },
+#     },
+# }
 
 
 # Password validation

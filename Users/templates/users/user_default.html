@@ -135,10 +135,7 @@
     <script src="https://kit.fontawesome.com/9ce9c6ea4b.js" crossorigin="anonymous"></script>
 
     <!-- Charts.js  -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"
-        integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -165,7 +162,7 @@
 
 
             } else {
-                settingIcon.style.color = "#136ff8";
+                settingIcon.style.color = "#02541a";
                 settingIcon.style.transform = "rotate(0deg)";
                 settingsBlock.style.display = "none";
             }
@@ -208,7 +205,14 @@
             type: "bar",
             data: {},
             options: {
-                position: "right"
+                scales: {
+                    y: {
+                        ticks: {
+                            precision: 0 // Display only integer values
+                        },
+                        beginAtZero: true
+                    }
+                }
             }
         });
 
@@ -221,6 +225,7 @@
             xhr.onload = function () {
 
                 const rjson = JSON.parse(this.responseText)
+                console.log(rjson)
                 data = {
                     labels: rjson.days,
                     datasets: [{
@@ -239,6 +244,7 @@
 
                     }]
                 }
+
 
                 appointment_chart.data = data
                 appointment_chart.update()
@@ -276,11 +282,13 @@
                         }],
                     },
                     options: {
-
                         barPercentage: 1,
                         y: {
-                            beginAtZero: true
-                        }
+                        ticks: {
+                            precision: 0 // Display only integer values
+                        },
+                        beginAtZero: true
+                    }
                     },
                 });
             } // onload ends here
@@ -297,19 +305,18 @@
                 format: 'yyyy-mm-dd'
             });
         });
-        function pendingAppintment(){
+        function pendingAppintment() {
             const xhr = new XMLHttpRequest()
-            xhr.open("GET","{% url 'pending-appointment' %}")
+            xhr.open("GET", "{% url 'pending-appointment' %}")
 
-            xhr.onload = function(){
+            xhr.onload = function () {
                 const rjson = JSON.parse(this.responseText)
-                document.getElementById("pending-appointment").innerHTML = "Pending Appointment(s): "+ rjson.count
+                document.getElementById("pending-appointment").innerHTML = "Pending Appointment(s): " + rjson.count
             }
             xhr.send()
         }
         document.getElementById("pending-appointment").onload = pendingAppintment()
     </script>
-
 </body>
 
 </html>
