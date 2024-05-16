@@ -14,7 +14,7 @@ x-django-build: &django-build
 services:
   django:
     <<: [ *django-build, *common ]
-    command: gunicorn HealthCare.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn HeatlhCare.wsgi:application --bind 0.0.0.0:8000
     ports:
       - "8000:8000"
     env_file:
