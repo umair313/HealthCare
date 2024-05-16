@@ -1,0 +1,43 @@
+
+x-common: &common
+  stdin_open: true
+  tty: true
+  restart: unless-stopped
+
+x-django-build: &django-build
+  build:
+    context: .
+    dockerfile: Dockerfile.dev
+    args:
+      REQUIREMENT_FILE: requirements.dev.txt
+
+services:
+  django:
+    <<: [ *django-build, *common ]
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./:/code
+      - health_care_static_volume:/code/static
+      - health_care_media_volume:/code/media
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13.3-buster
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - health_care_postgres_data:/var/lib/postgresql/data/
+    <<: *common
+
+
+volumes:
+  health_care_postgres_data:
+  health_care_static_volume:
+  health_care_media_volume:
